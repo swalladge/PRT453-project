@@ -406,17 +406,6 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	}
 
 	/**
-	 * initialize the CarSalesSystem.
-	 *
-	 * @param args name of binary file to use is the only argument needed
-	 */
-	public static void main(String[] args)
-	{
-		CarSalesSystem carSales = new CarSalesSystem("cars.dat");
-		carSales.setVisible(true);
-	}
-
-	/**
 	 * search by age, using the CarsCollection
 	 *
 	 * @param minAge minimum age of car
