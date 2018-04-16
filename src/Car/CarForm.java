@@ -23,6 +23,7 @@ public class CarForm {
     public void clean() {
         List<CarFieldCleaner> rules = new ArrayList<>();
         rules.add(new PriceCleaner());
+        // TODO: add cleaners to trim the string fields
 
         for ( CarFieldCleaner cleaner : rules){
             cleaner.clean(this.carFields);
@@ -34,11 +35,14 @@ public class CarForm {
         this.isValid = true;
         this.errors = new ArrayList<>();
 
-        List<CarFieldValidator> rules = new ArrayList<>();
-        rules.add(new PriceValidator());
+        // validators that we want to run here
+        List<CarFieldValidator> validators = new ArrayList<>();
+        validators.add(new PriceValidator());
+        validators.add(new YearValidator());
+        validators.add(new KmValidator());
 
         // run all the validator rules
-        for ( CarFieldValidator validator : rules){
+        for ( CarFieldValidator validator : validators){
             try {
                 validator.validate(this.carFields);
             } catch (FieldValidationException e) {
