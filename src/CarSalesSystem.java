@@ -85,8 +85,8 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	private JPanel titlePanel = new JPanel(new GridLayout(2, 1));
 	private JLabel statusLabel = new JLabel();
 	private JLabel pictureLabel = new JLabel();
-	private JLabel carCoLabel = new JLabel("My Car.Car Company", JLabel.CENTER);
-	private JLabel salesSysLabel = new JLabel("Car.Car Sales System", JLabel.CENTER);
+	private JLabel carCoLabel = new JLabel("My Car Company", JLabel.CENTER);
+	private JLabel salesSysLabel = new JLabel("Car Sales System", JLabel.CENTER);
 	private JTabbedPane theTab = new JTabbedPane(JTabbedPane.LEFT);
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu fileMenu = new JMenu("File");
@@ -99,7 +99,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	 */
 	public CarSalesSystem(String f)
 	{
-		super("Car.Car Sales");
+		super("Car Sales");
 
 		addWindowListener(closer);
 		addComponentListener(this);
@@ -165,7 +165,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 		SearchByOtherPanel searchByOtherPanel = new SearchByOtherPanel(this);
 
 		theTab.add("Welcome", welcomePanel);
-		theTab.add("Add a Car.Car", addCarPanel);
+		theTab.add("Add a Car", addCarPanel);
 		theTab.add("Show all makes and models", showAllCarsPanel);
 		theTab.add("Search on age", searchByAgePanel);
 		theTab.add("Search on Price and Distance traveled", searchByOtherPanel);

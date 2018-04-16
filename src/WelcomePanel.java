@@ -24,7 +24,7 @@ import javax.swing.border.*;
 public class WelcomePanel extends JPanel implements ChangeListener
 {
 	private CarSalesSystem carSystem;
-	private JLabel headingLabel = new JLabel("Welcome to the Car.Car Sales System", JLabel.CENTER);
+	private JLabel headingLabel = new JLabel("Welcome to the Car Sales System", JLabel.CENTER);
 	private JLabel carsLabel = new JLabel();
 	private JLabel manufacturersLabel = new JLabel();
 	private JLabel avgPriceLabel = new JLabel();
@@ -127,7 +127,7 @@ public class WelcomePanel extends JPanel implements ChangeListener
 		avgPriceLabel.setText("Average car price: " + String.valueOf(avgPrice));
 		avgKmLabel.setText("Average car kilometers: " + String.valueOf(avgKm));
 		avgAgeLabel.setText("Average car age: " + String.valueOf(avgAge));
-		versionLabel.setText("Car.Car Sales System, Version " + CarSalesSystem.APP_VERSION);
+		versionLabel.setText("Car Sales System, Version " + CarSalesSystem.APP_VERSION);
 		dataSizeLabel.setText("Size of data file: " + size + " bytes");
 	}
 }

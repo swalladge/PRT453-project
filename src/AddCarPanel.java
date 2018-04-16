@@ -25,7 +25,7 @@ import javax.swing.*;
 public class AddCarPanel extends JPanel implements ActionListener
 {
 	private CarSalesSystem carSystem;
-	private JLabel headingLabel = new JLabel("Add a Car.Car");
+	private JLabel headingLabel = new JLabel("Add a Car");
 	private JButton resetButton = new JButton("Reset");
 	private JButton saveButton = new JButton("Save");
 	private JPanel buttonPanel = new JPanel();
