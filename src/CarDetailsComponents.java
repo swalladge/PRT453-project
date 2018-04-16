@@ -1,3 +1,5 @@
+import Car.Car;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,7 +18,7 @@ import javax.swing.*;
  *    public void componentMoved(ComponentEvent ev)
  *    public void componentResized(ComponentEvent ev)
  *    public void componentShown(ComponentEvent ev)
- *    public void displayDetails(Car c)
+ *    public void displayDetails(Car.Car c)
  *    public JPanel getDetailsPanel()
  *    public String getInfoText()
  *    public String getKmText()

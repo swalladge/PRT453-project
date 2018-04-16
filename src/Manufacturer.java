@@ -1,23 +1,24 @@
-import java.util.*;
+import Car.Car;
+
 /**
- * Stores and retrieves Car objects
+ * Stores and retrieves Car.Car objects
  * @
  *
  * PUBLIC FEATURES:
  * // Constructors
- *    public Manufacturer(String nam, Car c)
+ *    public Manufacturer(String nam, Car.Car c)
  *
  * // Methods
- *    public void addCar(Car c)
+ *    public void addCar(Car.Car c)
  *    public int carCount()
- *    public Car[] getAllCars()
- *    public Car[] getAllCars()
+ *    public Car.Car[] getAllCars()
+ *    public Car.Car[] getAllCars()
  *    public String getManufacturerName()
- *    private Car[] resizeArray(Car[] c, int extendBy)
+ *    private Car.Car[] resizeArray(Car.Car[] c, int extendBy)
  *    public void setManufacturersName(String nam)
  *
  * COLLABORATORS:
- *    Car
+ *    Car.Car
  *
  * @version 1.0, 16 Oct 2004
  * @author Adam Black
@@ -29,7 +30,7 @@ public class Manufacturer implements java.io.Serializable
 
 	/**
 	 * @param nam name of manufacturer
-	 * @param c Car object to add to manufacturer
+	 * @param c Car.Car object to add to manufacturer
 	 */
 	public Manufacturer(String nam, Car c)
 	{
@@ -40,7 +41,7 @@ public class Manufacturer implements java.io.Serializable
 	/**
 	 * add a new car to manufacturer
 	 *
-	 * @param c Car to add to manufacturer
+	 * @param c Car.Car to add to manufacturer
 	 */
 	public void addCar(Car c)
 	{
@@ -59,16 +60,16 @@ public class Manufacturer implements java.io.Serializable
 
 	/**
 	 * get all cars by manufacturer
-	 * @return array of Car objects by manufacturer
+	 * @return array of Car.Car objects by manufacturer
 	 */
 	public Car[] getAllCars()
 	{
 		return car;
 	}
 
-	/*public Car getCar(int n)
+	/*public Car.Car getCar(int n)
 	{
-		Car returnCar;
+		Car.Car returnCar;
 
 		try
 		{
@@ -106,7 +107,7 @@ public class Manufacturer implements java.io.Serializable
 		return result;
 	}
 
-	/*public Car[] search(int minPrice, int maxPrice, int minDistance, int maxDistance)
+	/*public Car.Car[] search(int minPrice, int maxPrice, int minDistance, int maxDistance)
 	{
 		Vector result = new Vector();
 		int price;
@@ -125,7 +126,7 @@ public class Manufacturer implements java.io.Serializable
 		return CarSalesSystem.vectorToCar(result);
 	}*/
 
-	/*public Car[] search(int minAge, int maxAge)
+	/*public Car.Car[] search(int minAge, int maxAge)
 	{
 		Vector result = new Vector();
 

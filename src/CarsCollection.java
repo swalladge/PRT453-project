@@ -1,7 +1,8 @@
+import Car.Car;
+
 import java.util.*;
 import java.io.*;
-import java.awt.*;
-import javax.swing.*;
+
 /**
  * Stores manufacturers objects, and performs searches
  * @
@@ -12,18 +13,18 @@ import javax.swing.*;
  *    public CarsCollection(Manufacturer man)
  *
  * // Methods
- *    public int addCar(Car c)
+ *    public int addCar(Car.Car c)
  *    public int carsCount()
  *    public int manufacturerCount()
- *    public Car[] getAllCars()
+ *    public Car.Car[] getAllCars()
  *    public Manufacturer[] getAllManufacturers()
  *    public double getAverageAge()
  *    public double getAverageDistance()
  *    public double getAveragePrice()
  *    public void loadCars(String file) throws IOException, ClassNotFoundException
  *    public void saveCars(String file) throws IOException
- *    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
- *    public Car[] search(int minAge, int maxAge)
+ *    public Car.Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+ *    public Car.Car[] search(int minAge, int maxAge)
  *
  * COLLABORATORS:
  *    Manufacturer

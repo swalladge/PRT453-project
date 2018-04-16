@@ -1,3 +1,5 @@
+package Car;
+
 import java.util.*;
 /**
  * Stores information about cars. Also calculates the cars age from the current date.
@@ -5,8 +7,8 @@ import java.util.*;
  *
  * PUBLIC FEATURES:
  * // Constructors
- *    public Car()
- *    public Car(String man, String mod, String info)
+ *    public Car.Car()
+ *    public Car.Car(String man, String mod, String info)
  *
  * // Methods
  *    public int getAge()

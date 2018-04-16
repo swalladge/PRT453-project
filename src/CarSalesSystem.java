@@ -1,3 +1,5 @@
+import Car.Car;
+
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,22 +20,22 @@ import javax.swing.event.*;
  *    public void actionPerformed(ActionEvent ev)
  *    public void addCarUpdateListener(Object listener)
 
- *    public int addNewCar(Car c)
+ *    public int addNewCar(Car.Car c)
  *    public void closing()
  *    public void componentHidden(ComponentEvent ev)
  * 	  public void componentMoved(ComponentEvent ev)
  *	  public void componentResized(ComponentEvent ev)
  *    public void componentShown(ComponentEvent ev)
  *    public static double[] convertToRange(String s)
- *    public Car[] getAllCars()
+ *    public Car.Car[] getAllCars()
  *    public boolean getCarsUpdated()
  *    public double getStatistics(int type)
  *    public static void main(String[] args)
- *    public Car[] search(int minAge, int maxAge)
- *    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+ *    public Car.Car[] search(int minAge, int maxAge)
+ *    public Car.Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
  *    public void setCarsUpdated()
  *    public void stateChanged(ChangeEvent ev)
- *    public static Car[] vectorToCar(Vector v)
+ *    public static Car.Car[] vectorToCar(Vector v)
  *
  * COLLABORATORS:
  *    AboutDialog, CarsCollection, WindowCloser, WelcomePanel, AddCarPanel
@@ -83,8 +85,8 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	private JPanel titlePanel = new JPanel(new GridLayout(2, 1));
 	private JLabel statusLabel = new JLabel();
 	private JLabel pictureLabel = new JLabel();
-	private JLabel carCoLabel = new JLabel("My Car Company", JLabel.CENTER);
-	private JLabel salesSysLabel = new JLabel("Car Sales System", JLabel.CENTER);
+	private JLabel carCoLabel = new JLabel("My Car.Car Company", JLabel.CENTER);
+	private JLabel salesSysLabel = new JLabel("Car.Car Sales System", JLabel.CENTER);
 	private JTabbedPane theTab = new JTabbedPane(JTabbedPane.LEFT);
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu fileMenu = new JMenu("File");
@@ -97,7 +99,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	 */
 	public CarSalesSystem(String f)
 	{
-		super("Car Sales");
+		super("Car.Car Sales");
 
 		addWindowListener(closer);
 		addComponentListener(this);
@@ -163,7 +165,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 		SearchByOtherPanel searchByOtherPanel = new SearchByOtherPanel(this);
 
 		theTab.add("Welcome", welcomePanel);
-		theTab.add("Add a Car", addCarPanel);
+		theTab.add("Add a Car.Car", addCarPanel);
 		theTab.add("Show all makes and models", showAllCarsPanel);
 		theTab.add("Search on age", searchByAgePanel);
 		theTab.add("Search on Price and Distance traveled", searchByOtherPanel);
@@ -226,7 +228,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	}
 
 	/**
-	 * handles closing events for the Car Sales System. Saves any updated data to a binary file
+	 * handles closing events for the Car.Car Sales System. Saves any updated data to a binary file
 	 */
 	public void closing()
 	{
@@ -432,7 +434,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	}
 
 	/**
-	 * call this method to alert the Car Sales System that a car has been added, and also send
+	 * call this method to alert the Car.Car Sales System that a car has been added, and also send
 	 * messages to all registered car update listeners
 	 */
 	public void setCarsUpdated()
@@ -477,8 +479,8 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	/**
 	 * converts a vector to a car array
 	 *
-	 * @param v vector containing array of Car objects only
-	 * @return Car array containing car objects from the vector
+	 * @param v vector containing array of Car.Car objects only
+	 * @return Car.Car array containing car objects from the vector
 	 */
 	public static Car[] vectorToCar(Vector v)
 	{
