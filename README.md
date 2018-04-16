@@ -1,7 +1,13 @@
-# CodeSmells
-Test 1
+# PRT453 group project
 
-Aman don't sneak in here.
+
+## About
+
+This is the repository for group A's group project in PRT453, 2018.
+Group members: Samuel, Rahul, Bibin, and Jasleen.
+
+Code is from an example java project. THe aim of this project is to perform
+refactorings to patterns and do development according to the Scrum methodology.
 
 
 ## Developing
