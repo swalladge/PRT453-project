@@ -99,6 +99,7 @@ public class AddCarPanel extends JPanel implements ActionListener
             return;
         }
 
+        // init a new carform object that handles validating, collecting errors, etc.
 	    CarForm carForm = new CarForm(
 	    		carComponents.getManufacturerText(),
 				carComponents.getModelText(),
@@ -108,8 +109,10 @@ public class AddCarPanel extends JPanel implements ActionListener
                 year
 		);
 
+		// run all cleaning and validating methods
 	    carForm.cleanAndValidate();
 
+	    // if it's valid, then we want to save the car, otherwise abort and show the errors
 	    if (carForm.isValid()) {
             // create a car object from validated data.
             CarFields carFields = carForm.getFields();

@@ -21,11 +21,13 @@ public class CarForm {
     }
 
     public void clean() {
-        List<CarFieldCleaner> rules = new ArrayList<>();
-        rules.add(new PriceCleaner());
-        // TODO: add cleaners to trim the string fields
+        List<CarFieldCleaner> cleaners = new ArrayList<>();
+        cleaners.add(new PriceCleaner());
+        cleaners.add(new ManufacturerCleaner());
+        cleaners.add(new ModelCleaner());
+        cleaners.add(new InfoCleaner());
 
-        for ( CarFieldCleaner cleaner : rules){
+        for ( CarFieldCleaner cleaner : cleaners){
             cleaner.clean(this.carFields);
         }
     }
