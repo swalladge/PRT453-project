@@ -9,6 +9,9 @@ Group members: Samuel, Rahul, Bibin, and Jasleen.
 Code is from an example java project. THe aim of this project is to perform
 refactorings to patterns and do development according to the Scrum methodology.
 
+The actual software is a car sales management system, providing functions for
+managing, viewing, searching, and tracking an inventory of cars and related
+information about each car.
 
 ## Developing
 
