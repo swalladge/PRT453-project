@@ -1,3 +1,5 @@
+import Car.Car;
+
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,22 +20,22 @@ import javax.swing.event.*;
  *    public void actionPerformed(ActionEvent ev)
  *    public void addCarUpdateListener(Object listener)
 
- *    public int addNewCar(Car c)
+ *    public int addNewCar(Car.Car c)
  *    public void closing()
  *    public void componentHidden(ComponentEvent ev)
  * 	  public void componentMoved(ComponentEvent ev)
  *	  public void componentResized(ComponentEvent ev)
  *    public void componentShown(ComponentEvent ev)
  *    public static double[] convertToRange(String s)
- *    public Car[] getAllCars()
+ *    public Car.Car[] getAllCars()
  *    public boolean getCarsUpdated()
  *    public double getStatistics(int type)
  *    public static void main(String[] args)
- *    public Car[] search(int minAge, int maxAge)
- *    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+ *    public Car.Car[] search(int minAge, int maxAge)
+ *    public Car.Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
  *    public void setCarsUpdated()
  *    public void stateChanged(ChangeEvent ev)
- *    public static Car[] vectorToCar(Vector v)
+ *    public static Car.Car[] vectorToCar(Vector v)
  *
  * COLLABORATORS:
  *    AboutDialog, CarsCollection, WindowCloser, WelcomePanel, AddCarPanel
@@ -226,7 +228,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	}
 
 	/**
-	 * handles closing events for the Car Sales System. Saves any updated data to a binary file
+	 * handles closing events for the Car.Car Sales System. Saves any updated data to a binary file
 	 */
 	public void closing()
 	{
@@ -432,7 +434,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	}
 
 	/**
-	 * call this method to alert the Car Sales System that a car has been added, and also send
+	 * call this method to alert the Car.Car Sales System that a car has been added, and also send
 	 * messages to all registered car update listeners
 	 */
 	public void setCarsUpdated()
@@ -477,8 +479,8 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 	/**
 	 * converts a vector to a car array
 	 *
-	 * @param v vector containing array of Car objects only
-	 * @return Car array containing car objects from the vector
+	 * @param v vector containing array of Car.Car objects only
+	 * @return Car.Car array containing car objects from the vector
 	 */
 	public static Car[] vectorToCar(Vector v)
 	{

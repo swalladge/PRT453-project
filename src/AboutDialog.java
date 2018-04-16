@@ -13,7 +13,7 @@ import javax.swing.*;
  *    public void actionPerformed(ActionEvent ev)
  *    public void closing()
  *    public void showAbout()
- *    public int addNewCar(Car c)
+ *    public int addNewCar(Car.Car c)
  *    public void closing()
  *
  * COLLABORATORS:

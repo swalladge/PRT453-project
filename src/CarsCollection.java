@@ -1,7 +1,8 @@
+import Car.Car;
+
 import java.util.*;
 import java.io.*;
-import java.awt.*;
-import javax.swing.*;
+
 /**
  * Stores manufacturers objects, and performs searches
  * @
@@ -12,18 +13,18 @@ import javax.swing.*;
  *    public CarsCollection(Manufacturer man)
  *
  * // Methods
- *    public int addCar(Car c)
+ *    public int addCar(Car.Car c)
  *    public int carsCount()
  *    public int manufacturerCount()
- *    public Car[] getAllCars()
+ *    public Car.Car[] getAllCars()
  *    public Manufacturer[] getAllManufacturers()
  *    public double getAverageAge()
  *    public double getAverageDistance()
  *    public double getAveragePrice()
  *    public void loadCars(String file) throws IOException, ClassNotFoundException
  *    public void saveCars(String file) throws IOException
- *    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
- *    public Car[] search(int minAge, int maxAge)
+ *    public Car.Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+ *    public Car.Car[] search(int minAge, int maxAge)
  *
  * COLLABORATORS:
  *    Manufacturer
@@ -35,18 +36,18 @@ public class CarsCollection
 {
 	/**
 	 * this constant is returned by the addCar method to indicate the car was successfully
-	 * added to the Car Sales System
+	 * added to the Car.Car Sales System
 	 */
 	public static final int NO_ERROR = 0;
 	/**
 	 * this constant is returned by the addCar method to indicate the car wasn't successfully
-	 * added to the Car Sales System because the manufacturer has reached it's maximum of
+	 * added to the Car.Car Sales System because the manufacturer has reached it's maximum of
 	 * 20 cars
 	 */
 	public static final int CARS_MAXIMUM_REACHED = 1;
 	/**
 	 * this constant is returned by the addCar method to indicate the car wasn't successfully
-	 * added to the Car Sales System because the system has reached it's maximum of
+	 * added to the Car.Car Sales System because the system has reached it's maximum of
 	 * 20 manufacturers
 	 */
 	public static final int MANUFACTURERS_MAXIMUM_REACHED = 2;
@@ -348,7 +349,7 @@ public class CarsCollection
 	 * @param maxPrice maximum price of car
 	 * @param minDistance minimum distance travelled by car
 	 * @param maxDistance maximum distance travelled by car
-	 * @return array of Car objects that matched the search criteria
+	 * @return array of Car.Car objects that matched the search criteria
 	 */
 	public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
 	{
@@ -376,7 +377,7 @@ public class CarsCollection
 	 *
 	 * @param minAge minimum age of car
 	 * @param maxAge maximum age of car
-	 * @return array of Car objects that matched the search criteria
+	 * @return array of Car.Car objects that matched the search criteria
 	 */
 	public Car[] search(int minAge, int maxAge)
 	{

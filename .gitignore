@@ -59,8 +59,9 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml
 # *.ipr
+# # ignore misc since it can be different per computer
+.idea/misc.xml
 
 # Sonarlint plugin
 .idea/sonarlint
