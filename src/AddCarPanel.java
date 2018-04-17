@@ -24,65 +24,65 @@ import javax.swing.*;
  */
 public class AddCarPanel extends JPanel implements ActionListener
 {
-	private CarSalesSystem carSystem;
-	private JLabel headingLabel = new JLabel("Add a Car");
-	private JButton resetButton = new JButton("Reset");
-	private JButton saveButton = new JButton("Save");
-	private JPanel buttonPanel = new JPanel();
-	private CarDetailsComponents carComponents = new CarDetailsComponents();
+    private CarSalesSystem carSystem;
+    private JLabel headingLabel = new JLabel("Add a Car");
+    private JButton resetButton = new JButton("Reset");
+    private JButton saveButton = new JButton("Save");
+    private JPanel buttonPanel = new JPanel();
+    private CarDetailsComponents carComponents = new CarDetailsComponents();
 
-	/**
-	 * @param carSys links to a CarSalesSystem object
-	 * @param dest where the components will be placed
-	 */
-	public AddCarPanel(CarSalesSystem carSys)
-	{
-		carSystem = carSys;
+    /**
+     * @param carSys links to a CarSalesSystem object
+     * @param dest where the components will be placed
+     */
+    public AddCarPanel(CarSalesSystem carSys)
+    {
+        carSystem = carSys;
 
-		resetButton.addActionListener(this);
-		saveButton.addActionListener(this);
-		headingLabel.setAlignmentX(0.5f);
+        resetButton.addActionListener(this);
+        saveButton.addActionListener(this);
+        headingLabel.setAlignmentX(0.5f);
 
-		buttonPanel.add(resetButton);
-		buttonPanel.add(saveButton);
+        buttonPanel.add(resetButton);
+        buttonPanel.add(saveButton);
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		add(Box.createVerticalStrut(10));
-		add(headingLabel);
-		add(Box.createVerticalStrut(15));
-		carComponents.add(buttonPanel, "Center");
-		add(carComponents);
-	}
+        add(Box.createVerticalStrut(10));
+        add(headingLabel);
+        add(Box.createVerticalStrut(15));
+        carComponents.add(buttonPanel, "Center");
+        add(carComponents);
+    }
 
-	/**
-	 * check which buttons were pressed
-	 *
-	 * @param ev ActionEvent object
-	 */
-	public void actionPerformed(ActionEvent ev)
-	{
-		if (ev.getSource() == resetButton)
-			resetButtonClicked();
-		else if (ev.getSource() == saveButton)
-			saveButtonClicked();
-	}
+    /**
+     * check which buttons were pressed
+     *
+     * @param ev ActionEvent object
+     */
+    public void actionPerformed(ActionEvent ev)
+    {
+        if (ev.getSource() == resetButton)
+            resetButtonClicked();
+        else if (ev.getSource() == saveButton)
+            saveButtonClicked();
+    }
 
-	private void resetButtonClicked()
-	{
-		carComponents.clearTextFields();
-	}
+    private void resetButtonClicked()
+    {
+        carComponents.clearTextFields();
+    }
 
-	// someone clicked the save button - now we need to extract the car form fields,
+    // someone clicked the save button - now we need to extract the car form fields,
     // clean and validate them, and finally save to the database
-	private void saveButtonClicked() {
-	    // initial converting to numbers from raw fields to make it easier to work with in cleaning/validation later
-		Double km;
-		Double price;
-		Integer year;
-		try {
-			km = Double.parseDouble(carComponents.getKmText());
-		} catch (NumberFormatException e) {
+    private void saveButtonClicked() {
+        // initial converting to numbers from raw fields to make it easier to work with in cleaning/validation later
+        Double km;
+        Double price;
+        Integer year;
+        try {
+            km = Double.parseDouble(carComponents.getKmText());
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(carSystem, "KM not valid number!");
             return;
         }
@@ -100,20 +100,20 @@ public class AddCarPanel extends JPanel implements ActionListener
         }
 
         // init a new carform object that handles validating, collecting errors, etc.
-	    CarForm carForm = new CarForm(
-	    		carComponents.getManufacturerText(),
-				carComponents.getModelText(),
+        CarForm carForm = new CarForm(
+                carComponents.getManufacturerText(),
+            	carComponents.getModelText(),
                 carComponents.getInfoText(),
                 km,
                 price,
                 year
-		);
+        );
 
-		// run all cleaning and validating methods
-	    carForm.cleanAndValidate();
+        // run all cleaning and validating methods
+        carForm.cleanAndValidate();
 
-	    // if it's valid, then we want to save the car, otherwise abort and show the errors
-	    if (carForm.isValid()) {
+        // if it's valid, then we want to save the car, otherwise abort and show the errors
+        if (carForm.isValid()) {
             // create a car object from validated data.
             CarFields carFields = carForm.getFields();
             Car myCar = new Car(carFields.getManufacturer(), carFields.getModel(), carFields.getInfo());
@@ -139,8 +139,8 @@ public class AddCarPanel extends JPanel implements ActionListener
             else if (result == CarsCollection.MANUFACTURERS_MAXIMUM_REACHED)
                 JOptionPane.showMessageDialog(carSystem, "The maximum amount of manufacturers in the car system has been reached.\nUnfortunately you cannot add any further manufacturers to this system", "Problem adding car", JOptionPane.WARNING_MESSAGE);
         } else {
-	        String msgs = String.join("\n", carForm.getValidationErrors());
+            String msgs = String.join("\n", carForm.getValidationErrors());
             JOptionPane.showMessageDialog(carSystem, msgs);
         }
-	}
+    }
 }

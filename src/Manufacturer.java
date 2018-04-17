@@ -25,124 +25,124 @@ import Car.Car;
  */
 public class Manufacturer implements java.io.Serializable
 {
-	private String manufacturer;		//name of manufacturer
-	private Car[] car = new Car[0];		//stores information about all the cars by a manufacturer
+    private String manufacturer;        //name of manufacturer
+    private Car[] car = new Car[0];        //stores information about all the cars by a manufacturer
 
-	/**
-	 * @param nam name of manufacturer
-	 * @param c Car.Car object to add to manufacturer
-	 */
-	public Manufacturer(String nam, Car c)
-	{
-		manufacturer = nam.toUpperCase();
-		addCar(c);
-	}
+    /**
+     * @param nam name of manufacturer
+     * @param c Car.Car object to add to manufacturer
+     */
+    public Manufacturer(String nam, Car c)
+    {
+        manufacturer = nam.toUpperCase();
+        addCar(c);
+    }
 
-	/**
-	 * add a new car to manufacturer
-	 *
-	 * @param c Car.Car to add to manufacturer
-	 */
-	public void addCar(Car c)
-	{
-		car = resizeArray(car, 1);
-		car[car.length - 1] = c;
-	}
+    /**
+     * add a new car to manufacturer
+     *
+     * @param c Car.Car to add to manufacturer
+     */
+    public void addCar(Car c)
+    {
+        car = resizeArray(car, 1);
+        car[car.length - 1] = c;
+    }
 
-	/**
-	 * count cars by manufacturer
-	 * @return number of cars in manufacturer
-	 */
-	public int carCount()
-	{
-		return car.length;
-	}
+    /**
+     * count cars by manufacturer
+     * @return number of cars in manufacturer
+     */
+    public int carCount()
+    {
+        return car.length;
+    }
 
-	/**
-	 * get all cars by manufacturer
-	 * @return array of Car.Car objects by manufacturer
-	 */
-	public Car[] getAllCars()
-	{
-		return car;
-	}
+    /**
+     * get all cars by manufacturer
+     * @return array of Car.Car objects by manufacturer
+     */
+    public Car[] getAllCars()
+    {
+        return car;
+    }
 
-	/*public Car.Car getCar(int n)
-	{
-		Car.Car returnCar;
+    /*public Car.Car getCar(int n)
+    {
+        Car.Car returnCar;
 
-		try
-		{
-			returnCar = car[n];
-		}
-		catch (Exception exp)
-		{
-			returnCar = null;
-		}
+        try
+        {
+            returnCar = car[n];
+        }
+        catch (Exception exp)
+        {
+            returnCar = null;
+        }
 
-		return returnCar;
-	}*/
+        return returnCar;
+    }*/
 
-	public String getManufacturerName()
-	{
-		return manufacturer;
-	}
+    public String getManufacturerName()
+    {
+        return manufacturer;
+    }
 
-	/**
-	 * resize the array by a number of element
-	 *
-	 * @param c array object to extend
-	 * @param extendBy number to extend by
-	 * @return resultant, extended array
-	 */
-	private Car[] resizeArray(Car[] c, int extendBy)
-	{
-		Car[] result = new Car[c.length + extendBy];
+    /**
+     * resize the array by a number of element
+     *
+     * @param c array object to extend
+     * @param extendBy number to extend by
+     * @return resultant, extended array
+     */
+    private Car[] resizeArray(Car[] c, int extendBy)
+    {
+        Car[] result = new Car[c.length + extendBy];
 
-		for (int i = 0; i < c.length; i++)
-		{
-			result[i] = c[i];
-		}
+        for (int i = 0; i < c.length; i++)
+        {
+            result[i] = c[i];
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/*public Car.Car[] search(int minPrice, int maxPrice, int minDistance, int maxDistance)
-	{
-		Vector result = new Vector();
-		int price;
-		double distance;
+    /*public Car.Car[] search(int minPrice, int maxPrice, int minDistance, int maxDistance)
+    {
+        Vector result = new Vector();
+        int price;
+        double distance;
 
-		for (int i = 0; i < car.length; i++)
-		{
-			price = car[i].getPrice();
-			distance = car[i].getKilometers();
+        for (int i = 0; i < car.length; i++)
+        {
+            price = car[i].getPrice();
+            distance = car[i].getKilometers();
 
-			if (price >= minPrice && price <= maxPrice)
- 				if (distance >= minDistance && distance <= maxDistance)
-					result.add(car[i]);
-		}
+            if (price >= minPrice && price <= maxPrice)
+             	if (distance >= minDistance && distance <= maxDistance)
+            		result.add(car[i]);
+        }
 
-		return CarSalesSystem.vectorToCar(result);
-	}*/
+        return CarSalesSystem.vectorToCar(result);
+    }*/
 
-	/*public Car.Car[] search(int minAge, int maxAge)
-	{
-		Vector result = new Vector();
+    /*public Car.Car[] search(int minAge, int maxAge)
+    {
+        Vector result = new Vector();
 
-		for (int i = 0; i < car.length; i++)
-		{
-			if (car[i].getAge() >= minAge && car[i].getAge() <= maxAge)
-			{
-				result.addElement(car[i]);
-			}
-		}
+        for (int i = 0; i < car.length; i++)
+        {
+            if (car[i].getAge() >= minAge && car[i].getAge() <= maxAge)
+            {
+            	result.addElement(car[i]);
+            }
+        }
 
-		return CarSalesSystem.vectorToCar(result);
-	}*/
+        return CarSalesSystem.vectorToCar(result);
+    }*/
 
-	public void setManufacturersName(String nam)
-	{
-		manufacturer = nam.toUpperCase();
-	}
+    public void setManufacturersName(String nam)
+    {
+        manufacturer = nam.toUpperCase();
+    }
 }
