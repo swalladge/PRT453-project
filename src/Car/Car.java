@@ -37,7 +37,7 @@ public class Car implements java.io.Serializable
 	private String manufacturer;
 	private String information;
 	private int year;
-	private int price;
+	private double price;
 	private double kilometers;
 
 	public Car(){}
@@ -83,7 +83,7 @@ public class Car implements java.io.Serializable
 		return model;
 	}
 
-	public int getPrice()
+	public double getPrice()
 	{
 		return price;
 	}
@@ -113,7 +113,7 @@ public class Car implements java.io.Serializable
 		model = mod;
 	}
 
-	public void setPrice(int cost)
+	public void setPrice(double cost)
 	{
 		price = cost;
 	}

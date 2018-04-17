@@ -351,10 +351,10 @@ public class CarsCollection
 	 * @param maxDistance maximum distance travelled by car
 	 * @return array of Car.Car objects that matched the search criteria
 	 */
-	public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+	public Car[] search(double minPrice, double maxPrice, double minDistance, double maxDistance)
 	{
 		Vector result = new Vector();
-		int price;
+		Double price;
 		double distance;
 		Car[] car;
 		car = getAllCars();

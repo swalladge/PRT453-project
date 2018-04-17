@@ -78,7 +78,7 @@ public class AddCarPanel extends JPanel implements ActionListener
 	private void saveButtonClicked() {
 	    // initial converting to numbers from raw fields to make it easier to work with in cleaning/validation later
 		Double km;
-		Integer price;
+		Double price;
 		Integer year;
 		try {
 			km = Double.parseDouble(carComponents.getKmText());
@@ -87,9 +87,9 @@ public class AddCarPanel extends JPanel implements ActionListener
             return;
         }
         try {
-            price = Integer.parseInt(carComponents.getPriceText());
+            price = Double.parseDouble(carComponents.getPriceText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(carSystem, "Price not valid whole number!");
+            JOptionPane.showMessageDialog(carSystem, "Price not valid number!");
             return;
         }
         try {

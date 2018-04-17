@@ -9,7 +9,7 @@ public class CarForm {
     private CarFields carFields;
     private List<String> errors;
 
-    public CarForm(String manufacturerText, String modelText, String infoText, Double kmText, Integer priceText, Integer yearText) {
+    public CarForm(String manufacturerText, String modelText, String infoText, Double kmText, Double priceText, Integer yearText) {
         this.carFields = new CarFields(manufacturerText, modelText, infoText, kmText, priceText, yearText);
         this.isValid = false;
         this.errors = new ArrayList<>();

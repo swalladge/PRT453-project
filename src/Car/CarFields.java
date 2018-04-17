@@ -6,9 +6,9 @@ public class CarFields {
     private String model;
     private String info;
     private Double km;
-    private Integer price;
+    private Double price;
 
-    public CarFields(String manufacturer, String model, String info, Double km, Integer price, Integer year) {
+    public CarFields(String manufacturer, String model, String info, Double km, Double price, Integer year) {
         this.year = year;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -17,11 +17,11 @@ public class CarFields {
         this.price = price;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
