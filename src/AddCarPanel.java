@@ -102,7 +102,7 @@ public class AddCarPanel extends JPanel implements ActionListener
         // init a new carform object that handles validating, collecting errors, etc.
         CarForm carForm = new CarForm(
                 carComponents.getManufacturerText(),
-            	carComponents.getModelText(),
+                carComponents.getModelText(),
                 carComponents.getInfoText(),
                 km,
                 price,

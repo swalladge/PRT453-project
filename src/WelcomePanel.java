@@ -96,14 +96,14 @@ public class WelcomePanel extends JPanel implements ChangeListener
             // the Welcome tab has just been chosen
             if (tab.getSelectedIndex() == 0)
             {
-            	// if the statistics is not up to date
-            	if (carsUpdated)
-            	{
-            		// update them
-            		updateStats();
-            		// next time don't update the statistics, unless a car is added to the system
-            		carsUpdated = false;
-            	}
+                // if the statistics is not up to date
+                if (carsUpdated)
+                {
+                    // update them
+                    updateStats();
+                    // next time don't update the statistics, unless a car is added to the system
+                    carsUpdated = false;
+                }
             }
         }
     }

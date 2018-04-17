@@ -166,13 +166,13 @@ public class SearchByOtherPanel extends JPanel implements ActionListener
 
             if (carList.length == 1)
             {
-            	nextButton.setEnabled(false);
-            	previousButton.setEnabled(false);
+                nextButton.setEnabled(false);
+                previousButton.setEnabled(false);
             }
             else
             {
-            	nextButton.setEnabled(true);
-            	previousButton.setEnabled(true);
+                nextButton.setEnabled(true);
+                previousButton.setEnabled(true);
             }
 
             carSystem.repaint();

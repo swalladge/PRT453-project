@@ -85,7 +85,7 @@ public class CarsCollection
         {
             // if manufacturer already exists
             if (manufacturer[i].getManufacturerName().equalsIgnoreCase(name))
-            	index = i;
+                index = i;
         }
 
         // if manufacturer doesn't exist
@@ -93,18 +93,18 @@ public class CarsCollection
         {
             if (manufacturer.length < maxManufacturers)
             {
-            	man = new Manufacturer(name, c);
-            	addManufacturer(man);
+                man = new Manufacturer(name, c);
+                addManufacturer(man);
             }
             else
-            	result = MANUFACTURERS_MAXIMUM_REACHED;
+                result = MANUFACTURERS_MAXIMUM_REACHED;
         }
         else
         {
             if (manufacturer[index].carCount() < maxCars)
-            	manufacturer[index].addCar(c);
+                manufacturer[index].addCar(c);
             else
-            	result = CARS_MAXIMUM_REACHED;
+                result = CARS_MAXIMUM_REACHED;
         }
 
         return result;
@@ -160,7 +160,7 @@ public class CarsCollection
             car = manufacturer[i].getAllCars();
             for (int j = 0; j < car.length; j++)
             {
-            	result.addElement(car[j]);
+                result.addElement(car[j]);
             }
         }
 
@@ -193,8 +193,8 @@ public class CarsCollection
             car = manufacturer[i].getAllCars();
             for (int j = 0; j < car.length; j++)
             {
-            	result += car[j].getAge();
-            	count++;
+                result += car[j].getAge();
+                count++;
             }
         }
         if (count == 0)
@@ -219,8 +219,8 @@ public class CarsCollection
             car = manufacturer[i].getAllCars();
             for (int j = 0; j < car.length; j++)
             {
-            	result += car[j].getKilometers();
-            	count++;
+                result += car[j].getKilometers();
+                count++;
             }
         }
         if (count == 0)
@@ -245,8 +245,8 @@ public class CarsCollection
             car = manufacturer[i].getAllCars();
             for (int j = 0; j < car.length; j++)
             {
-            	result += car[j].getPrice();
-            	count++;
+                result += car[j].getPrice();
+                count++;
             }
         }
         if (count == 0)
@@ -318,20 +318,20 @@ public class CarsCollection
         {
             do
             {
-            	flag = 0;
-            	for (int i = 0; i < items; i++)
-            	{
-            		if (i + 1 < items)
-            		{
-            			if (manufacturer[i].getManufacturerName().compareTo(manufacturer[i + 1].getManufacturerName()) > 0)
-            			{
-            				temp = manufacturer[i];
-            				manufacturer[i] = manufacturer[i + 1];
-            				manufacturer[i + 1] = temp;
-            				flag++;
-            			}
-            		}
-            	}
+                flag = 0;
+                for (int i = 0; i < items; i++)
+                {
+                    if (i + 1 < items)
+                    {
+                        if (manufacturer[i].getManufacturerName().compareTo(manufacturer[i + 1].getManufacturerName()) > 0)
+                        {
+                            temp = manufacturer[i];
+                            manufacturer[i] = manufacturer[i + 1];
+                            manufacturer[i + 1] = temp;
+                            flag++;
+                        }
+                    }
+                }
             }
             while (flag > 0);
 
@@ -365,8 +365,8 @@ public class CarsCollection
             distance = car[i].getKilometers();
 
             if (price >= minPrice && price <= maxPrice)
-             	if (distance >= minDistance && distance <= maxDistance)
-            		result.add(car[i]);
+                 if (distance >= minDistance && distance <= maxDistance)
+                    result.add(car[i]);
         }
 
         return CarSalesSystem.vectorToCar(result);
@@ -391,20 +391,20 @@ public class CarsCollection
         {
             for (int i = 0; i < car.length; i++)
             {
-            	if (car[i].getAge() >= minAge)
-            	{
-            		result.addElement(car[i]);
-            	}
+                if (car[i].getAge() >= minAge)
+                {
+                    result.addElement(car[i]);
+                }
             }
         }
         else
         {
             for (int i = 0; i < car.length; i++)
             {
-            	if (car[i].getAge() >= minAge && car[i].getAge() <= maxAge)
-            	{
-            		result.addElement(car[i]);
-            	}
+                if (car[i].getAge() >= minAge && car[i].getAge() <= maxAge)
+                {
+                    result.addElement(car[i]);
+                }
             }
         }
 

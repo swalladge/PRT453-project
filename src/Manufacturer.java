@@ -119,8 +119,8 @@ public class Manufacturer implements java.io.Serializable
             distance = car[i].getKilometers();
 
             if (price >= minPrice && price <= maxPrice)
-             	if (distance >= minDistance && distance <= maxDistance)
-            		result.add(car[i]);
+                 if (distance >= minDistance && distance <= maxDistance)
+                    result.add(car[i]);
         }
 
         return CarSalesSystem.vectorToCar(result);
@@ -134,7 +134,7 @@ public class Manufacturer implements java.io.Serializable
         {
             if (car[i].getAge() >= minAge && car[i].getAge() <= maxAge)
             {
-            	result.addElement(car[i]);
+                result.addElement(car[i]);
             }
         }
 

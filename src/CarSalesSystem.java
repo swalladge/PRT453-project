@@ -238,21 +238,21 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
         {
             do
             {
-            	try
-            	{
-            		carCollection.saveCars(file);
-            		ok = true;
-            	}
-            	catch (java.io.IOException exp)
-            	{
-            		int result = JOptionPane.showConfirmDialog(this, "The data file could not be written, possibly because you don't have access to this location.\nIf you chose No to retry you will lose all car data from this session.\n\nWould you like to reattempt saving the data file?", "Problem saving data", JOptionPane.YES_NO_OPTION);
+                try
+                {
+                    carCollection.saveCars(file);
+                    ok = true;
+                }
+                catch (java.io.IOException exp)
+                {
+                    int result = JOptionPane.showConfirmDialog(this, "The data file could not be written, possibly because you don't have access to this location.\nIf you chose No to retry you will lose all car data from this session.\n\nWould you like to reattempt saving the data file?", "Problem saving data", JOptionPane.YES_NO_OPTION);
 
-            		// checks if user wants to reattempt saving the data file
-            		if (result == JOptionPane.YES_OPTION)
-            			ok = false;
-            		else
-            			ok = true;
-            	}
+                    // checks if user wants to reattempt saving the data file
+                    if (result == JOptionPane.YES_OPTION)
+                        ok = false;
+                    else
+                        ok = true;
+                }
             }
             while (!ok);
         }
@@ -277,9 +277,9 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
             Dimension size = getSize();
 
             if (size.height < 530)
-            	size.height = 530;
+                size.height = 530;
             if (size.width < 675)
-            	size.width = 675;
+                size.width = 675;
 
             setSize(size);
         }
@@ -310,35 +310,35 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
             // if true the range is either of the form 'm+' or 'm'
             if (parts.length == 1)
             {
-            	String c = s.substring(s.length() - 1);
+                String c = s.substring(s.length() - 1);
 
-            	// if in the form "m+"
-            	if (c.equals("+"))
-            	{
-            		// get lower bounds from the string
-            		bounds[0] = Double.parseDouble(s.substring(0, s.length() - 1));
-            		// no upper maximum specified, infinite
-            		bounds[1] = -1;
-            	}
-            	// if true the number is of the form 'm'
-            	else
-            	{
-            		// upper bounds == lower bounds. The range is actually just a single number
-            		bounds[0] = Double.parseDouble(s);
-            		bounds[1] = bounds[0];
-            	}
+                // if in the form "m+"
+                if (c.equals("+"))
+                {
+                    // get lower bounds from the string
+                    bounds[0] = Double.parseDouble(s.substring(0, s.length() - 1));
+                    // no upper maximum specified, infinite
+                    bounds[1] = -1;
+                }
+                // if true the number is of the form 'm'
+                else
+                {
+                    // upper bounds == lower bounds. The range is actually just a single number
+                    bounds[0] = Double.parseDouble(s);
+                    bounds[1] = bounds[0];
+                }
             }
             // if true, in the form "m-n"
             else if(parts.length == 2)
             {
-            	bounds[0] = Double.parseDouble(parts[0]);
-            	bounds[1] = Double.parseDouble(parts[1]);
-            	if (bounds[0] > bounds[1])
-            	{
-            		//incorrect bounds, example, 10-5
-            		bounds[0] = -1;
-            		bounds[1] = -1;
-            	}
+                bounds[0] = Double.parseDouble(parts[0]);
+                bounds[1] = Double.parseDouble(parts[1]);
+                if (bounds[0] > bounds[1])
+                {
+                    //incorrect bounds, example, 10-5
+                    bounds[0] = -1;
+                    bounds[1] = -1;
+                }
             }
         }
         catch (NumberFormatException exp)
@@ -385,7 +385,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 
         if (type == CARS_COUNT)
         {
-            result	= carCollection.carsCount();
+            result    = carCollection.carsCount();
         }
         else if (type == MANUFACTURERS_COUNT)
         {
@@ -448,18 +448,18 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
 
             try
             {
-            	//get a reference to the method which we want to invoke to the listener
-            	java.lang.reflect.Method callingMethod = registeredListeners.get(i).getClass().getMethod("carsUpdated", paramType);
-            	//invoke the method with our parameters
-            	callingMethod.invoke(registeredListeners.get(i), param);
+                //get a reference to the method which we want to invoke to the listener
+                java.lang.reflect.Method callingMethod = registeredListeners.get(i).getClass().getMethod("carsUpdated", paramType);
+                //invoke the method with our parameters
+                callingMethod.invoke(registeredListeners.get(i), param);
             }
             catch (NoSuchMethodException exp)
             {
-            	System.out.println("Warning, 'public carsUpdated(CarEvent)' method does not exist in " + registeredListeners.get(i).getClass().getName() + ". You will not receive any car update events");
+                System.out.println("Warning, 'public carsUpdated(CarEvent)' method does not exist in " + registeredListeners.get(i).getClass().getName() + ". You will not receive any car update events");
             }
             catch (IllegalAccessException exp)
             {
-            	System.out.println("Warning, the 'public carUpdated(CarEvent)' method couldn't be called for unknown reasons, You will not receive any car update events");
+                System.out.println("Warning, the 'public carUpdated(CarEvent)' method couldn't be called for unknown reasons, You will not receive any car update events");
             }
             catch (Exception exp){}
         }

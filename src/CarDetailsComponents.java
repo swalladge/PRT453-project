@@ -191,14 +191,14 @@ public class CarDetailsComponents extends JPanel implements ComponentListener
 
             if (width >= 0)
             {
-            	/** these text fields had to be resized manually. Using insets didn't work for
-            	smaller areas of the panel. */
-            	manufacturerTextField.setColumns(width / divFactor);
-            	yearTextField.setColumns(width / divFactor);
-            	modelTextField.setColumns(width / divFactor);
-            	priceTextField.setColumns(width / divFactor);
-            	kmTextField.setColumns(width / divFactor);
-            	infoTextArea.setColumns((width / divFactor) + 3); // this text box is larger
+                /** these text fields had to be resized manually. Using insets didn't work for
+                smaller areas of the panel. */
+                manufacturerTextField.setColumns(width / divFactor);
+                yearTextField.setColumns(width / divFactor);
+                modelTextField.setColumns(width / divFactor);
+                priceTextField.setColumns(width / divFactor);
+                kmTextField.setColumns(width / divFactor);
+                infoTextArea.setColumns((width / divFactor) + 3); // this text box is larger
             }
         }
     }
