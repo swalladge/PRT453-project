@@ -60,14 +60,6 @@ public class CarsCollection
     public CarsCollection(){}
 
     /**
-     * @param man manufacturer object to add to collection
-     */
-    public CarsCollection(Manufacturer man)
-    {
-        addManufacturer(man);
-    }
-
-    /**
      * adds a car to a CarCollection and files it in an appropriate manufacturer, or creates a new
      * manufacturer if none exist for the car
      *
@@ -254,22 +246,6 @@ public class CarsCollection
         else
             return (result / count);
     }
-
-    /*public Manufacturer getManufacturer(int index)
-    {
-        Manufacturer returnManufacturer;
-
-        try
-        {
-            returnManufacturer = manufacturer[index];
-        }
-        catch (Exception exp)
-        {
-            returnManufacturer = null;
-        }
-
-        return returnManufacturer;
-    }*/
 
     /**
      * load entire collectoin of cars into the manufacturer object from a data file
