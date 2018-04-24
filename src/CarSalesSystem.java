@@ -35,7 +35,6 @@ import javax.swing.event.*;
  *    public Car.Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
  *    public void setCarsUpdated()
  *    public void stateChanged(ChangeEvent ev)
- *    public static Car.Car[] vectorToCar(Vector v)
  *
  * COLLABORATORS:
  *    AboutDialog, CarsCollection, WindowCloser, WelcomePanel, AddCarPanel
@@ -463,24 +462,6 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
     {
         if (ev.getSource() == theTab)
             statusLabel.setText("Current panel: " + theTab.getTitleAt(theTab.getSelectedIndex()));
-    }
-
-    /**
-     * converts a vector to a car array
-     *
-     * @param v vector containing array of Car.Car objects only
-     * @return Car.Car array containing car objects from the vector
-     */
-    public static Car[] vectorToCar(Vector v)
-    {
-        Car[] ret = new Car[v.size()];
-
-        for (int i = 0; i < v.size(); i++)
-        {
-            ret[i] = (Car)v.elementAt(i);
-        }
-
-        return ret;
     }
 
     class WindowCloser extends WindowAdapter

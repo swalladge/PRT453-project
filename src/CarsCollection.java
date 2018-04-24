@@ -142,7 +142,7 @@ public class CarsCollection implements CarsCollectionInterface
             }
         }
 
-        return CarSalesSystem.vectorToCar(result);
+        return vectorToCar(result);
     }
 
     /**
@@ -299,7 +299,7 @@ public class CarsCollection implements CarsCollectionInterface
                     result.add(car[i]);
         }
 
-        return CarSalesSystem.vectorToCar(result);
+        return vectorToCar(result);
     }
 
     /**
@@ -338,6 +338,24 @@ public class CarsCollection implements CarsCollectionInterface
             }
         }
 
-        return CarSalesSystem.vectorToCar(result);
+        return vectorToCar(result);
+    }
+
+    /**
+     * converts a vector to a car array
+     *
+     * @param v vector containing array of Car.Car objects only
+     * @return Car.Car array containing car objects from the vector
+     */
+    private static Car[] vectorToCar(Vector v)
+    {
+        Car[] ret = new Car[v.size()];
+
+        for (int i = 0; i < v.size(); i++)
+        {
+            ret[i] = (Car)v.elementAt(i);
+        }
+
+        return ret;
     }
 }
