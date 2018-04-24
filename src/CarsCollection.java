@@ -32,39 +32,17 @@ import java.io.*;
  * @version 1.0, 16 Oct 2004
  * @author Adam Black
  */
-public class CarsCollection
+public class CarsCollection implements CarsCollectionInterface
 {
-    /**
-     * this constant is returned by the addCar method to indicate the car was successfully
-     * added to the Car.Car Sales System
-     */
-    public static final int NO_ERROR = 0;
-    /**
-     * this constant is returned by the addCar method to indicate the car wasn't successfully
-     * added to the Car.Car Sales System because the manufacturer has reached it's maximum of
-     * 20 cars
-     */
-    public static final int CARS_MAXIMUM_REACHED = 1;
-    /**
-     * this constant is returned by the addCar method to indicate the car wasn't successfully
-     * added to the Car.Car Sales System because the system has reached it's maximum of
-     * 20 manufacturers
-     */
-    public static final int MANUFACTURERS_MAXIMUM_REACHED = 2;
 
     private final int maxManufacturers = 20;
     private final int maxCars = 20;
 
     private Manufacturer[] manufacturer = new Manufacturer[0];
+    private CarsCollectionBackendInterface backend;
 
-    public CarsCollection(){}
-
-    /**
-     * @param man manufacturer object to add to collection
-     */
-    public CarsCollection(Manufacturer man)
-    {
-        addManufacturer(man);
+    public CarsCollection(CarsCollectionBackendInterface backend){
+        this.backend = backend;
     }
 
     /**
@@ -164,7 +142,7 @@ public class CarsCollection
             }
         }
 
-        return CarSalesSystem.vectorToCar(result);
+        return vectorToCar(result);
     }
 
     /**
@@ -255,33 +233,14 @@ public class CarsCollection
             return (result / count);
     }
 
-    /*public Manufacturer getManufacturer(int index)
-    {
-        Manufacturer returnManufacturer;
-
-        try
-        {
-            returnManufacturer = manufacturer[index];
-        }
-        catch (Exception exp)
-        {
-            returnManufacturer = null;
-        }
-
-        return returnManufacturer;
-    }*/
-
     /**
      * load entire collectoin of cars into the manufacturer object from a data file
      *
      * @param file filename of binary file to load car data from
      */
-    public void loadCars(String file) throws IOException, ClassNotFoundException
+    public void loadCars(String file) throws CarsCollectionBackendException
     {
-
-        ObjectInputStream inp = new ObjectInputStream(new FileInputStream(file));
-        manufacturer = (Manufacturer[])inp.readObject();
-        inp.close();
+        manufacturer = backend.loadCars(file);
     }
 
     /**
@@ -308,38 +267,9 @@ public class CarsCollection
      *
      * @param file of the binary file
      */
-    public void saveCars(String file) throws IOException
+    public void saveCars(String file) throws CarsCollectionBackendException
     {
-        int flag = 0;
-        int items = manufacturer.length;
-        Manufacturer temp;
-
-        if (manufacturer.length > 0)
-        {
-            do
-            {
-                flag = 0;
-                for (int i = 0; i < items; i++)
-                {
-                    if (i + 1 < items)
-                    {
-                        if (manufacturer[i].getManufacturerName().compareTo(manufacturer[i + 1].getManufacturerName()) > 0)
-                        {
-                            temp = manufacturer[i];
-                            manufacturer[i] = manufacturer[i + 1];
-                            manufacturer[i + 1] = temp;
-                            flag++;
-                        }
-                    }
-                }
-            }
-            while (flag > 0);
-
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-
-            out.writeObject(manufacturer);
-            out.close();
-        }
+        backend.saveCars(file, manufacturer);
     }
 
     /**
@@ -369,7 +299,7 @@ public class CarsCollection
                     result.add(car[i]);
         }
 
-        return CarSalesSystem.vectorToCar(result);
+        return vectorToCar(result);
     }
 
     /**
@@ -408,6 +338,24 @@ public class CarsCollection
             }
         }
 
-        return CarSalesSystem.vectorToCar(result);
+        return vectorToCar(result);
+    }
+
+    /**
+     * converts a vector to a car array
+     *
+     * @param v vector containing array of Car.Car objects only
+     * @return Car.Car array containing car objects from the vector
+     */
+    private static Car[] vectorToCar(Vector v)
+    {
+        Car[] ret = new Car[v.size()];
+
+        for (int i = 0; i < v.size(); i++)
+        {
+            ret[i] = (Car)v.elementAt(i);
+        }
+
+        return ret;
     }
 }
