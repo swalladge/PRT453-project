@@ -19,7 +19,6 @@ There are files in the repo to support opening the repository as an [Intellij ID
 project. The project can be run by navigating to `Main.java`, right clicking
 and selecting `Run 'Main.main()'` (or press `ctrl+shift+F10`). It should auto
 save that run configuration so you can click `Run` from the main menus or global
-keyboard shortcut.
+keyboard shortcut. If it complains about missing project out directory, enter this in the form: `$PROJECT_DIR$/out`.
 
-Could be a different process for other IDEs; maybe we should find a standard build
-system?
+
