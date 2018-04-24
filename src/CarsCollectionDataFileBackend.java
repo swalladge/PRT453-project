@@ -8,10 +8,13 @@ public class CarsCollectionDataFileBackend implements CarsCollectionBackendInter
             ObjectInputStream inp = new ObjectInputStream(new FileInputStream(file));
             manufacturers = (Manufacturer[]) inp.readObject();
             inp.close();
+        } catch (java.io.EOFException e){
+            // ignore, since this just means the file was empty (probably)
+            manufacturers = new Manufacturer[0];
         } catch (IOException e) {
-            throw new CarsCollectionBackendException("IO error loading from file.");
+            throw new CarsCollectionBackendException("IO error loading from file. Please create a new empty '" + file + "' file.");
         } catch (ClassNotFoundException e) {
-            throw new CarsCollectionBackendException("ClassNotFoundException: invalid data in file.");
+            throw new CarsCollectionBackendException("ClassNotFoundException: invalid data in data file.");
         }
 
         return manufacturers;

@@ -238,7 +238,7 @@ public class CarsCollection implements CarsCollectionInterface
      *
      * @param file filename of binary file to load car data from
      */
-    public void loadCars(String file) throws IOException, ClassNotFoundException
+    public void loadCars(String file) throws CarsCollectionBackendException
     {
         manufacturer = backend.loadCars(file);
     }
@@ -267,7 +267,7 @@ public class CarsCollection implements CarsCollectionInterface
      *
      * @param file of the binary file
      */
-    public void saveCars(String file) throws IOException
+    public void saveCars(String file) throws CarsCollectionBackendException
     {
         backend.saveCars(file, manufacturer);
     }

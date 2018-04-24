@@ -31,8 +31,8 @@ public interface CarsCollectionInterface {
     public double getAverageAge();
     public double getAverageDistance();
     public double getAveragePrice();
-    public void loadCars(String file) throws IOException, ClassNotFoundException;
-    public void saveCars(String file) throws IOException;
+    public void loadCars(String file) throws CarsCollectionBackendException;
+    public void saveCars(String file) throws CarsCollectionBackendException;
     public Car[] search(double minPrice, double maxPrice, double minDistance, double maxDistance);
     public Car[] search(int minAge, int maxAge);
 }

@@ -117,21 +117,9 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
         {
             carCollection.loadCars(file);
         }
-        catch (java.io.FileNotFoundException exp)
+        catch (CarsCollectionBackendException e)
         {
-            System.out.println("The data file, 'cars.dat' doesn't exist. Plase create an empty file named 'cars.dat'");
-            System.exit(0);
-        }
-        // empty cars.dat file, this error should be ignored
-        catch (java.io.EOFException exp){}
-        catch (java.io.IOException exp)
-        {
-            System.out.println("The data file, 'cars.dat' is possibly corrupted. Please delete it and create a new empty data file named cars.dat");
-            System.exit(0);
-        }
-        catch (Exception exp)
-        {
-            System.out.println("There was an error loading 'cars.dat'. Try deleting and creating a new empty file named 'cars.dat'");
+            System.out.println(e.getMessage());
             System.exit(0);
         }
 
@@ -244,7 +232,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
                     carCollection.saveCars(file);
                     ok = true;
                 }
-                catch (java.io.IOException exp)
+                catch (CarsCollectionBackendException e)
                 {
                     int result = JOptionPane.showConfirmDialog(this, "The data file could not be written, possibly because you don't have access to this location.\nIf you chose No to retry you will lose all car data from this session.\n\nWould you like to reattempt saving the data file?", "Problem saving data", JOptionPane.YES_NO_OPTION);
 
