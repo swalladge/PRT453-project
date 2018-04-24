@@ -108,7 +108,8 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
         setSize(780, 560);
 
         Container c = getContentPane();
-        carCollection = new CarsCollection();
+        CarsCollectionBackendInterface dataFileBackend = new CarsCollectionDataFileBackend();
+        carCollection = new CarsCollection(dataFileBackend);
 
         file = f;
 

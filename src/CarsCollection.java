@@ -39,8 +39,11 @@ public class CarsCollection implements CarsCollectionInterface
     private final int maxCars = 20;
 
     private Manufacturer[] manufacturer = new Manufacturer[0];
+    private CarsCollectionBackendInterface backend;
 
-    public CarsCollection(){}
+    public CarsCollection(CarsCollectionBackendInterface backend){
+        this.backend = backend;
+    }
 
     /**
      * adds a car to a CarCollection and files it in an appropriate manufacturer, or creates a new
@@ -237,10 +240,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public void loadCars(String file) throws IOException, ClassNotFoundException
     {
-
-        ObjectInputStream inp = new ObjectInputStream(new FileInputStream(file));
-        manufacturer = (Manufacturer[])inp.readObject();
-        inp.close();
+        manufacturer = backend.loadCars(file);
     }
 
     /**
@@ -269,36 +269,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public void saveCars(String file) throws IOException
     {
-        int flag = 0;
-        int items = manufacturer.length;
-        Manufacturer temp;
-
-        if (manufacturer.length > 0)
-        {
-            do
-            {
-                flag = 0;
-                for (int i = 0; i < items; i++)
-                {
-                    if (i + 1 < items)
-                    {
-                        if (manufacturer[i].getManufacturerName().compareTo(manufacturer[i + 1].getManufacturerName()) > 0)
-                        {
-                            temp = manufacturer[i];
-                            manufacturer[i] = manufacturer[i + 1];
-                            manufacturer[i + 1] = temp;
-                            flag++;
-                        }
-                    }
-                }
-            }
-            while (flag > 0);
-
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-
-            out.writeObject(manufacturer);
-            out.close();
-        }
+        backend.saveCars(file, manufacturer);
     }
 
     /**
