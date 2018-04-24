@@ -125,7 +125,7 @@ public class AddCarPanel extends JPanel implements ActionListener
             int result = carSystem.addNewCar(myCar);
 
             // if the car was added successfully
-            if (result == CarsCollection.NO_ERROR)
+            if (result == CarsCollectionInterface.NO_ERROR)
             {
                 carSystem.setCarsUpdated();
                 JOptionPane.showMessageDialog(carSystem, "Record added.", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
@@ -133,10 +133,10 @@ public class AddCarPanel extends JPanel implements ActionListener
                 carComponents.setFocusManufacturerTextField();
             }
             // for that manufacturer, the limit has been reached
-            else if (result == CarsCollection.CARS_MAXIMUM_REACHED)
+            else if (result == CarsCollectionInterface.CARS_MAXIMUM_REACHED)
                 JOptionPane.showMessageDialog(carSystem, "The maximum amount of cars for that manufacturer has been reached.\nUnfortunately you cannot add any further cars to this manufacturer", "Problem adding car", JOptionPane.WARNING_MESSAGE);
                 // the car system has reached the maximum number of manufacturers allowed
-            else if (result == CarsCollection.MANUFACTURERS_MAXIMUM_REACHED)
+            else if (result == CarsCollectionInterface.MANUFACTURERS_MAXIMUM_REACHED)
                 JOptionPane.showMessageDialog(carSystem, "The maximum amount of manufacturers in the car system has been reached.\nUnfortunately you cannot add any further manufacturers to this system", "Problem adding car", JOptionPane.WARNING_MESSAGE);
         } else {
             String msgs = String.join("\n", carForm.getValidationErrors());

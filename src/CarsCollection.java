@@ -32,25 +32,8 @@ import java.io.*;
  * @version 1.0, 16 Oct 2004
  * @author Adam Black
  */
-public class CarsCollection
+public class CarsCollection implements CarsCollectionInterface
 {
-    /**
-     * this constant is returned by the addCar method to indicate the car was successfully
-     * added to the Car.Car Sales System
-     */
-    public static final int NO_ERROR = 0;
-    /**
-     * this constant is returned by the addCar method to indicate the car wasn't successfully
-     * added to the Car.Car Sales System because the manufacturer has reached it's maximum of
-     * 20 cars
-     */
-    public static final int CARS_MAXIMUM_REACHED = 1;
-    /**
-     * this constant is returned by the addCar method to indicate the car wasn't successfully
-     * added to the Car.Car Sales System because the system has reached it's maximum of
-     * 20 manufacturers
-     */
-    public static final int MANUFACTURERS_MAXIMUM_REACHED = 2;
 
     private final int maxManufacturers = 20;
     private final int maxCars = 20;
