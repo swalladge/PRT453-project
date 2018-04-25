@@ -8,7 +8,7 @@ import Car.Car;
 public class CarsCollectionDataFileBackend implements CarsCollectionBackendInterface {
     @Override
     public List<Car> loadCars(String file) throws CarsCollectionBackendException {
-        ArrayList<Car> cars = null;
+        ArrayList<Car> cars;
         try {
             ObjectInputStream inp = new ObjectInputStream(new FileInputStream(file));
             cars = (ArrayList<Car>) inp.readObject();
@@ -28,7 +28,7 @@ public class CarsCollectionDataFileBackend implements CarsCollectionBackendInter
     @Override
     public void saveCars(String file, List<Car> cars) throws CarsCollectionBackendException {
 
-        // original version sorted as well, so
+        // sort by manufacturer name, then by model
         cars.sort(Comparator.comparing(car -> car.getManufacturer() + car.getModel()));
 
         try {
