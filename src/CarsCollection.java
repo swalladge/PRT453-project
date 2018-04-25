@@ -1,7 +1,6 @@
 import Car.Car;
 
 import java.util.*;
-import java.io.*;
 
 /**
  * Stores manufacturers objects, and performs searches
@@ -13,18 +12,18 @@ import java.io.*;
  *    public CarsCollection(Manufacturer man)
  *
  * // Methods
- *    public int addCar(Car.Car c)
+ *    public int addCar(Car c)
  *    public int carsCount()
  *    public int manufacturerCount()
- *    public Car.Car[] getAllCars()
+ *    public Car[] getAllCars()
  *    public Manufacturer[] getAllManufacturers()
  *    public double getAverageAge()
  *    public double getAverageDistance()
  *    public double getAveragePrice()
  *    public void loadCars(String file) throws IOException, ClassNotFoundException
  *    public void saveCars(String file) throws IOException
- *    public Car.Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
- *    public Car.Car[] search(int minAge, int maxAge)
+ *    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+ *    public Car[] search(int minAge, int maxAge)
  *
  * COLLABORATORS:
  *    Manufacturer
@@ -35,10 +34,7 @@ import java.io.*;
 public class CarsCollection implements CarsCollectionInterface
 {
 
-    private final int maxManufacturers = 20;
-    private final int maxCars = 20;
-
-    private Manufacturer[] manufacturer = new Manufacturer[0];
+    private List<Car> cars = new ArrayList<Car>();
     private CarsCollectionBackendInterface backend;
 
     public CarsCollection(CarsCollectionBackendInterface backend){
@@ -54,49 +50,10 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public int addCar(Car c)
     {
-        Manufacturer man;
-        String name = c.getManufacturer();
-        int index = -1;
-        int result = NO_ERROR;
-
-        for (int i = 0; i < manufacturer.length; i++)
-        {
-            // if manufacturer already exists
-            if (manufacturer[i].getManufacturerName().equalsIgnoreCase(name))
-                index = i;
+        if (!this.cars.contains(c)) {
+            this.cars.add(c);
         }
-
-        // if manufacturer doesn't exist
-        if (index == -1)
-        {
-            if (manufacturer.length < maxManufacturers)
-            {
-                man = new Manufacturer(name, c);
-                addManufacturer(man);
-            }
-            else
-                result = MANUFACTURERS_MAXIMUM_REACHED;
-        }
-        else
-        {
-            if (manufacturer[index].carCount() < maxCars)
-                manufacturer[index].addCar(c);
-            else
-                result = CARS_MAXIMUM_REACHED;
-        }
-
-        return result;
-    }
-
-    /**
-     * add a Manufacturer object to the CarsCollection
-     *
-     * @param man Manufacturer object to add
-     */
-    private void addManufacturer(Manufacturer man)
-    {
-        manufacturer = resizeArray(manufacturer, 1);
-        manufacturer[manufacturer.length - 1] = man;
+        return NO_ERROR;
     }
 
     /**
@@ -106,12 +63,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public int carsCount()
     {
-        int count = 0;
-
-        for (int i = 0; i < manufacturer.length; i++)
-            count += manufacturer[i].carCount();
-
-        return count;
+        return this.cars.size();
     }
 
     /**
@@ -121,7 +73,13 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public int manufacturerCount()
     {
-        return manufacturer.length;
+        HashSet<String> mans = new HashSet<String>();
+        for (Car car: this.cars) {
+            if (!mans.contains(car.getManufacturer())) {
+                mans.add(car.getManufacturer());
+            }
+        }
+        return mans.size();
     }
 
     /**
@@ -129,30 +87,9 @@ public class CarsCollection implements CarsCollectionInterface
      *
      * @return entire collection of cars in CarsCollection from all manufacturers
      */
-    public Car[] getAllCars()
+    public List<Car> getAllCars()
     {
-        Vector result = new Vector();
-        Car[] car;
-        for (int i = 0; i < manufacturer.length; i++)
-        {
-            car = manufacturer[i].getAllCars();
-            for (int j = 0; j < car.length; j++)
-            {
-                result.addElement(car[j]);
-            }
-        }
-
-        return vectorToCar(result);
-    }
-
-    /**
-     * get manufacturers
-     *
-     * @return all manufacturers in the collection
-     */
-    public Manufacturer[] getAllManufacturers()
-    {
-        return manufacturer;
+        return this.cars;
     }
 
     /**
@@ -162,23 +99,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public double getAverageAge()
     {
-        Car[] car;
-        double result = 0;
-        int count = 0;
-
-        for (int i = 0; i < manufacturer.length; i++)
-        {
-            car = manufacturer[i].getAllCars();
-            for (int j = 0; j < car.length; j++)
-            {
-                result += car[j].getAge();
-                count++;
-            }
-        }
-        if (count == 0)
-            return 0;
-        else
-            return (result / count);
+        return this.cars.stream().mapToDouble((c) -> c.getAge()).average().orElse(0);
     }
 
     /**
@@ -188,23 +109,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public double getAverageDistance()
     {
-        Car[] car;
-        double result = 0;
-        int count = 0;
-
-        for (int i = 0; i < manufacturer.length; i++)
-        {
-            car = manufacturer[i].getAllCars();
-            for (int j = 0; j < car.length; j++)
-            {
-                result += car[j].getKilometers();
-                count++;
-            }
-        }
-        if (count == 0)
-            return 0;
-        else
-            return (result / count);
+        return this.cars.stream().mapToDouble((c) -> c.getKilometers()).average().orElse(0);
     }
 
     /**
@@ -214,23 +119,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public double getAveragePrice()
     {
-        Car[] car;
-        double result = 0;
-        int count = 0;
-
-        for (int i = 0; i < manufacturer.length; i++)
-        {
-            car = manufacturer[i].getAllCars();
-            for (int j = 0; j < car.length; j++)
-            {
-                result += car[j].getPrice();
-                count++;
-            }
-        }
-        if (count == 0)
-            return 0;
-        else
-            return (result / count);
+        return this.cars.stream().mapToDouble((c) -> c.getPrice()).average().orElse(0);
     }
 
     /**
@@ -240,26 +129,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public void loadCars(String file) throws CarsCollectionBackendException
     {
-        manufacturer = backend.loadCars(file);
-    }
-
-    /**
-     * resize the manufacturer array while maintaining data integrity
-     *
-     * @param inArray array to resize
-     * @param extendBy indicates how many elements should the array be extended by
-     * @return the resized Manufacturer array
-     */
-    private Manufacturer[] resizeArray(Manufacturer[] inArray, int extendBy)
-    {
-        Manufacturer[] result = new Manufacturer[inArray.length + extendBy];
-
-        for (int i = 0; i < inArray.length; i++)
-        {
-            result[i] = inArray[i];
-        }
-
-        return result;
+        this.cars = backend.loadCars(file);
     }
 
     /**
@@ -269,7 +139,7 @@ public class CarsCollection implements CarsCollectionInterface
      */
     public void saveCars(String file) throws CarsCollectionBackendException
     {
-        backend.saveCars(file, manufacturer);
+        backend.saveCars(file, this.cars);
     }
 
     /**
@@ -279,27 +149,25 @@ public class CarsCollection implements CarsCollectionInterface
      * @param maxPrice maximum price of car
      * @param minDistance minimum distance travelled by car
      * @param maxDistance maximum distance travelled by car
-     * @return array of Car.Car objects that matched the search criteria
+     * @return array of Car objects that matched the search criteria
      */
-    public Car[] search(double minPrice, double maxPrice, double minDistance, double maxDistance)
+    public List<Car> search(double minPrice, double maxPrice, double minDistance, double maxDistance)
     {
-        Vector result = new Vector();
-        Double price;
-        double distance;
-        Car[] car;
-        car = getAllCars();
+        List<Car> result = new ArrayList<Car>();
 
-        for (int i = 0; i < car.length; i++)
+        for (Car car: this.cars)
         {
-            price = car[i].getPrice();
-            distance = car[i].getKilometers();
+            double price = car.getPrice();
+            double distance = car.getKilometers();
 
-            if (price >= minPrice && price <= maxPrice)
-                 if (distance >= minDistance && distance <= maxDistance)
-                    result.add(car[i]);
+            if (price >= minPrice && price <= maxPrice) {
+                if (distance >= minDistance && distance <= maxDistance) {
+                    result.add(car);
+                }
+            }
         }
 
-        return vectorToCar(result);
+        return result;
     }
 
     /**
@@ -309,53 +177,17 @@ public class CarsCollection implements CarsCollectionInterface
      * @param maxAge maximum age of car
      * @return array of Car.Car objects that matched the search criteria
      */
-    public Car[] search(int minAge, int maxAge)
+    public List<Car> search(int minAge, int maxAge)
     {
-        Car[] car;
-        car = getAllCars();
-        Vector result = new Vector();
+        List<Car> result = new ArrayList<Car>();
+        for (Car car: this.cars) {
+            int age = car.getAge();
 
-        /* Putting the if statement first will increase effeciency since it isn't constantly
-        checking the condition for each loop. It does use almost double the amount of code though */
-        if (maxAge == -1)
-        {
-            for (int i = 0; i < car.length; i++)
-            {
-                if (car[i].getAge() >= minAge)
-                {
-                    result.addElement(car[i]);
-                }
+            if (age >= minAge && (maxAge == -1 || age <= maxAge)) {
+                result.add(car);
             }
         }
-        else
-        {
-            for (int i = 0; i < car.length; i++)
-            {
-                if (car[i].getAge() >= minAge && car[i].getAge() <= maxAge)
-                {
-                    result.addElement(car[i]);
-                }
-            }
-        }
-
-        return vectorToCar(result);
+        return result;
     }
 
-    /**
-     * converts a vector to a car array
-     *
-     * @param v vector containing array of Car.Car objects only
-     * @return Car.Car array containing car objects from the vector
-     */
-    private static Car[] vectorToCar(Vector v)
-    {
-        Car[] ret = new Car[v.size()];
-
-        for (int i = 0; i < v.size(); i++)
-        {
-            ret[i] = (Car)v.elementAt(i);
-        }
-
-        return ret;
-    }
 }

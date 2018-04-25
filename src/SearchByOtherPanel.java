@@ -1,5 +1,7 @@
 import Car.Car;
 
+import java.util.List;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -26,7 +28,7 @@ public class SearchByOtherPanel extends JPanel implements ActionListener
         "50001-100000", "100001-200000", "200001-300000", "300001+"};
     private final String[] distance = {"0", "1-10000", "10001-20000", "20001-30000", "30001-40000",
         "40001-50000", "50001-80000", "80001-100000", "100001-200000", "200001-300000", "300001+"};
-    private Car[] carList;
+    private List<Car> carList;
     private CarSalesSystem carSystem;
     private int currentIndex = 0;
     private JLabel headingLabel = new JLabel("Search on Price and Distance Traveled");
@@ -109,10 +111,10 @@ public class SearchByOtherPanel extends JPanel implements ActionListener
      */
     private void nextButtonClicked()
     {
-        if (currentIndex < carList.length - 1)
+        if (currentIndex < carList.size() - 1)
         {
             currentIndex++;
-            carComponents.displayDetails(carList[currentIndex]);
+            carComponents.displayDetails(carList.get(currentIndex));
         }
         else
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);
@@ -126,7 +128,7 @@ public class SearchByOtherPanel extends JPanel implements ActionListener
         if (currentIndex > 0)
         {
             currentIndex--;
-            carComponents.displayDetails(carList[currentIndex]);
+            carComponents.displayDetails(carList.get(currentIndex));
         }
         else
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);
@@ -158,13 +160,13 @@ public class SearchByOtherPanel extends JPanel implements ActionListener
             carList = carSystem.search((int)priceRange[0], (int)priceRange[1], (double)distanceRange[0], (double)distanceRange[1]);
         }
 
-        if (carList.length > 0)
+        if (carList.size() > 0)
         {
             currentIndex = 0;
             carComponents.setVisible(true);
-            carComponents.displayDetails(carList[0]);
+            carComponents.displayDetails(carList.get(0));
 
-            if (carList.length == 1)
+            if (carList.size() == 1)
             {
                 nextButton.setEnabled(false);
                 previousButton.setEnabled(false);

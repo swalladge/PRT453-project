@@ -1,6 +1,7 @@
 import Car.Car;
 
 import java.awt.event.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.event.*;
 /**
@@ -25,7 +26,7 @@ import javax.swing.event.*;
 public class ShowAllCarsPanel extends JPanel implements ActionListener, ChangeListener
 {
     private CarSalesSystem carSystem;
-    private Car[] carList;
+    private List<Car> carList;
     private int currentIndex = 0;
     private JLabel headingLabel = new JLabel("Show all makes and models");
     private JButton previousButton = new JButton("Previous");
@@ -43,8 +44,8 @@ public class ShowAllCarsPanel extends JPanel implements ActionListener, ChangeLi
         carSystem = carSys;
         carList = carSystem.getAllCars();
 
-        if (carList.length > 0)
-            carComponents.displayDetails(carList[0]);
+        if (carList.size() > 0)
+            carComponents.displayDetails(carList.get(0));
 
         carSys.addCarUpdateListener(this);
 
@@ -113,7 +114,7 @@ public class ShowAllCarsPanel extends JPanel implements ActionListener, ChangeLi
                 {
                     carList = carSystem.getAllCars();
                     if (!(carList == null))
-                        carComponents.displayDetails(carList[currentIndex]);
+                        carComponents.displayDetails(carList.get(currentIndex));
                     // next time don't bother updating the car list unless a car is added again
                     carsUpdated = false;
                 }
@@ -126,10 +127,10 @@ public class ShowAllCarsPanel extends JPanel implements ActionListener, ChangeLi
      */
     private void nextButtonClicked()
     {
-        if (currentIndex < carList.length - 1)
+        if (currentIndex < carList.size() - 1)
         {
             currentIndex++;
-            carComponents.displayDetails(carList[currentIndex]);
+            carComponents.displayDetails(carList.get(currentIndex));
         }
         else
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);
@@ -143,7 +144,7 @@ public class ShowAllCarsPanel extends JPanel implements ActionListener, ChangeLi
         if (currentIndex > 0)
         {
             currentIndex--;
-            carComponents.displayDetails(carList[currentIndex]);
+            carComponents.displayDetails(carList.get(currentIndex));
         }
         else
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);

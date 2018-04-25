@@ -3,6 +3,7 @@ import Car.Car;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.event.*;
 /**
@@ -344,7 +345,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
      *
      * @return array of cars containing individual details
      */
-    public Car[] getAllCars()
+    public List<Car> getAllCars()
     {
         return carCollection.getAllCars();
     }
@@ -402,7 +403,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
      * @param maxAge maimum age of car
      * @return array of cars that match the search criteria
      */
-    public Car[] search(int minAge, int maxAge)
+    public List<Car> search(int minAge, int maxAge)
     {
         return carCollection.search(minAge, maxAge);
     }
@@ -416,7 +417,7 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
      * @param maxDistance maximum distance travelled by car
      * @return array of cars that match the search criteria
      */
-    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+    public List<Car> search(int minPrice, int maxPrice, double minDistance, double maxDistance)
     {
         return carCollection.search(minPrice, maxPrice,  minDistance, maxDistance);
     }

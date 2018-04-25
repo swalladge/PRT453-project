@@ -1,5 +1,7 @@
 import Car.Car;
 
+import java.util.List;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -24,7 +26,7 @@ public class SearchByAgePanel extends JPanel implements ActionListener
 {
     private final String[] age = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
         "11-15", "16-20", "21-25", "26-30", "31+"};
-    private Car[] carList;
+    private List<Car> carList;
     private CarSalesSystem carSystem;
     private int currentIndex = 0;
     private JLabel headingLabel = new JLabel("Search on age");
@@ -101,10 +103,10 @@ public class SearchByAgePanel extends JPanel implements ActionListener
      */
     private void nextButtonClicked()
     {
-        if (currentIndex < carList.length - 1)
+        if (currentIndex < carList.size() - 1)
         {
             currentIndex++;
-            carComponents.displayDetails(carList[currentIndex]);
+            carComponents.displayDetails(carList.get(currentIndex));
         }
         else
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);
@@ -118,7 +120,7 @@ public class SearchByAgePanel extends JPanel implements ActionListener
         if (currentIndex > 0)
         {
             currentIndex--;
-            carComponents.displayDetails(carList[currentIndex]);
+            carComponents.displayDetails(carList.get(currentIndex));
         }
         else
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);
@@ -148,13 +150,13 @@ public class SearchByAgePanel extends JPanel implements ActionListener
             carList = carSystem.search((int)range[0], (int)range[1]);
         }
 
-        if (carList.length > 0)
+        if (carList.size() > 0)
         {
             currentIndex = 0;
             carComponents.setVisible(true);
-            carComponents.displayDetails(carList[0]);
+            carComponents.displayDetails(carList.get(0));
 
-            if (carList.length == 1)
+            if (carList.size() == 1)
             {
                 nextButton.setEnabled(false);
                 previousButton.setEnabled(false);

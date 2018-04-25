@@ -1,4 +1,5 @@
-import java.io.IOException;
+import java.util.List;
+
 import Car.Car;
 
 public interface CarsCollectionInterface {
@@ -26,13 +27,12 @@ public interface CarsCollectionInterface {
     public int addCar(Car c);
     public int carsCount();
     public int manufacturerCount();
-    public Car[] getAllCars();
-    public Manufacturer[] getAllManufacturers();
+    public List<Car> getAllCars();
     public double getAverageAge();
     public double getAverageDistance();
     public double getAveragePrice();
     public void loadCars(String file) throws CarsCollectionBackendException;
     public void saveCars(String file) throws CarsCollectionBackendException;
-    public Car[] search(double minPrice, double maxPrice, double minDistance, double maxDistance);
-    public Car[] search(int minAge, int maxAge);
+    public List<Car> search(double minPrice, double maxPrice, double minDistance, double maxDistance);
+    public List<Car> search(int minAge, int maxAge);
 }
