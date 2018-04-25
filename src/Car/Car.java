@@ -34,7 +34,7 @@ import java.util.*;
 public class Car implements java.io.Serializable
 {
     private String model;
-    private String manufacturer;
+    private Manufacturer manufacturer;
     private String information;
     private int year;
     private double price;
@@ -43,14 +43,14 @@ public class Car implements java.io.Serializable
     public Car(){}
 
     /**
-     * @param man manufacturers name
+     * @param manName manufacturers name
      * @param mod model name
      * @param info extra information about the car
      */
-    public Car(String man, String mod, String info)
+    public Car(String manName, String mod, String info)
     {
         model = mod;
-        manufacturer = man.toUpperCase();
+        manufacturer = new Manufacturer(manName);
         information = info;
     }
 
@@ -75,7 +75,7 @@ public class Car implements java.io.Serializable
 
     public String getManufacturer()
     {
-        return manufacturer;
+        return manufacturer.toString();
     }
 
     public String getModel()
@@ -105,7 +105,15 @@ public class Car implements java.io.Serializable
 
     public void setManufacturer(String man)
     {
-        manufacturer = man.toUpperCase();
+        manufacturer = new Manufacturer(man);
+    }
+
+    public void setManufacturerObj(Manufacturer man) {
+        this.manufacturer = man;
+    }
+
+    public Manufacturer getManufacturerObj() {
+        return this.manufacturer;
     }
 
     public void setModel(String mod)
