@@ -1,6 +1,6 @@
 import Car.Car;
-
 import java.util.*;
+
 
 /**
  * Stores manufacturers objects, and performs searches
@@ -24,6 +24,8 @@ import java.util.*;
  *    public void saveCars(String file) throws IOException
  *    public Car[] search(int minPrice, int maxPrice, double minDistance, double maxDistance)
  *    public Car[] search(int minAge, int maxAge)
+ *    public double cost()
+ *    public string  
  *
  * COLLABORATORS:
  *    Manufacturer
