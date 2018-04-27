@@ -170,6 +170,38 @@ public class CarsCollection implements CarsCollectionInterface
         return result;
     }
 
+            /*Model as an Concrete Component*/
+        public class Model extends CarOptionals{
+            
+            public Model(){
+                description = "Optional Model Feature"
+            }
+        /*Implemented the cost() method in the class to return their cost*/
+        public double cost(){
+            return cost();
+        }
+    
+        /*Writing the Decorator*/
+        public abstract class OptionalDecorator extends CarOptionals{
+            public abstract String getDescription();
+        }
+
+        /*Writing ConcreteDecorator Class*/
+        /*Extended the Immobiliser class from OptionalDecorator and added CarOptional 
+        *instance variable (Composition) to hold the Model in which Immobilier is added.*/
+        public class Immobiliser extends OptionalDecorator{
+            CarOptionals carOptionals;
+            public Immobiliser(CarOptionals carOptionals){
+                this.CarOptionals=carOptionals;
+            }
+            public string getDescription(){
+                return CarOptionals.getDescriptions()+",Immobiliser";
+            }
+            public double cost(){
+                return $500+carOptionals.cost();
+            }
+        }
+
     /**
      * search by age
      *
