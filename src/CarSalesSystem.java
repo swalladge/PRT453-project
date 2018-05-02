@@ -150,8 +150,8 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
         WelcomePanel welcomePanel = new WelcomePanel(this, f);
         AddCarPanel addCarPanel = new AddCarPanel(this);
         ShowAllCarsPanel showAllCarsPanel = new ShowAllCarsPanel(this);
-        SearchByAgePanel searchByAgePanel = new SearchByAgePanel(this);
-        SearchByOtherPanel searchByOtherPanel = new SearchByOtherPanel(this);
+        SearchPanel searchByAgePanel = new SearchPanel(this, new SearchByAgeStrategy(this.carCollection));
+        SearchPanel searchByOtherPanel = new SearchPanel(this, new SearchByOtherStrategy(this.carCollection));
 
         theTab.add("Welcome", welcomePanel);
         theTab.add("Add a Car", addCarPanel);

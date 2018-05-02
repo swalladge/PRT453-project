@@ -5,49 +5,33 @@ import java.util.List;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 /**
- * A panel used for obtaining search parameters using car age
- * @
- *
- * PUBLIC FEATURES:
- * // Constructors
- *    public SearchByAgePanel(CarSalesSystem carSys, JPanel dest)
- *
- * // Methods
- *    public void actionPerformed(ActionEvent ev)
- *
- * COLLABORATORS:
- *    CarDetailComponents
- *
- * @version 1.0, 16 Oct 2004
- * @author Adam Black
+ * generic search panel - search strategy injected into it at instantiation time
  */
-public class SearchByAgePanel extends JPanel implements ActionListener
+public class SearchPanel extends JPanel implements ActionListener
 {
-    private final String[] age = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-        "11-15", "16-20", "21-25", "26-30", "31+"};
     private List<Car> carList;
     private CarSalesSystem carSystem;
     private int currentIndex = 0;
-    private JLabel headingLabel = new JLabel("Search on age");
-    private JLabel ageLabel = new JLabel("Car Age");
     private JButton searchButton = new JButton("Search");
     private JButton resetButton = new JButton("Reset");
     private JButton previousButton = new JButton("Previous");
     private JButton nextButton = new JButton("Next");
-    private JComboBox ageCombo = new JComboBox(age);
     private JPanel topPanel = new JPanel();
-    private JPanel agePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    private JPanel searchButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel searchButtonsPanel = new JPanel();
     private JPanel navigateButtonsPanel = new JPanel();
     private CarDetailsComponents carComponents = new CarDetailsComponents();
+    private SearchStrategy strategy;
 
     /**
      * @param carSys links to a CarSalesSystem object
-     * @param dest where the panel will be displayed on the main frame
+     * @param strategy the search strategy to be used
      */
-    public SearchByAgePanel(CarSalesSystem carSys)
+    public SearchPanel(CarSalesSystem carSys, SearchStrategy strategy)
     {
+        this.strategy = strategy;
+
         carSystem = carSys;
         setLayout(new BorderLayout());
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
@@ -57,23 +41,19 @@ public class SearchByAgePanel extends JPanel implements ActionListener
         resetButton.addActionListener(this);
         searchButton.addActionListener(this);
 
-        agePanel.add(ageLabel);
-        agePanel.add(ageCombo);
         searchButtonsPanel.add(searchButton);
         searchButtonsPanel.add(resetButton);
         navigateButtonsPanel.add(previousButton);
         navigateButtonsPanel.add(nextButton);
-        agePanel.setBorder(new javax.swing.border.EmptyBorder(new Insets(0, 5, 0, 0)));
-        searchButtonsPanel.setBorder(new javax.swing.border.EmptyBorder(new Insets(0, 5, 0, 0)));
 
-        headingLabel.setAlignmentX(0.5f);
 
-        topPanel.add(Box.createVerticalStrut(10));
-        topPanel.add(headingLabel);
-        topPanel.add(Box.createVerticalStrut(10));
-        topPanel.add(agePanel);
+        // add the strategy panel with controls in at the top of the panel
+        topPanel.add(this.strategy.getPanel());
+
         topPanel.add(searchButtonsPanel);
         topPanel.add(Box.createVerticalStrut(15));
+
+
         carComponents.add(navigateButtonsPanel, "Center");
         carComponents.setVisible(false);
 
@@ -90,12 +70,12 @@ public class SearchByAgePanel extends JPanel implements ActionListener
     {
         if (ev.getSource() == searchButton)
             searchButtonClicked();
+        else if (ev.getSource() == resetButton)
+            resetButtonClicked();
         else if (ev.getSource() == previousButton)
             previousButtonClicked();
         else if (ev.getSource() == nextButton)
             nextButtonClicked();
-        else if (ev.getSource() == resetButton)
-            resetButtonClicked();
     }
 
     /**
@@ -134,24 +114,21 @@ public class SearchByAgePanel extends JPanel implements ActionListener
         currentIndex = 0;
         carList = null;
         carComponents.setVisible(false);
-        ageCombo.setSelectedIndex(0);
+
+        // also reset the search strategy controls
+        this.strategy.reset();
     }
 
     /**
-     * find out search parameters, and do a search
+     * search cars based on price and distance travelled
      */
     private void searchButtonClicked()
     {
-        // converts a string range to a lower and upper bounds.
-        double[] range = CarSalesSystem.convertToRange((String)ageCombo.getSelectedItem());
+        // run the search now to get the results...
+        this.carList = this.strategy.doSearch();
 
-        if (range[0] >= 0)
-        {
-            carList = carSystem.search((int)range[0], (int)range[1]);
-        }
-
-        if (carList.size() > 0)
-        {
+        // ...and load the results into the carcomponents panel
+        if (carList.size() > 0) {
             currentIndex = 0;
             carComponents.setVisible(true);
             carComponents.displayDetails(carList.get(0));
@@ -169,7 +146,9 @@ public class SearchByAgePanel extends JPanel implements ActionListener
 
             carSystem.repaint();
         }
-        else
+        else {
             JOptionPane.showMessageDialog(carSystem, "Sorry, no search results were returned", "Search failed", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 }
