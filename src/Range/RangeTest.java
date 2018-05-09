@@ -147,6 +147,10 @@ class RangeTest {
     }
 
     @Test
+    void testInvalidRange12() {
+        Assertions.assertThrows(ParseException.class, () -> new Range("-"));
+    }
+    @Test
     void testEmptyRange() throws ParseException {
         Range range = new Range("");
         Assertions.assertTrue(range.contains(-50));
