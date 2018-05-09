@@ -1,6 +1,7 @@
 import java.util.List;
 
 import Car.Car;
+import Range.Range;
 
 public interface CarsCollectionInterface {
 
@@ -33,6 +34,6 @@ public interface CarsCollectionInterface {
     public double getAveragePrice();
     public void loadCars(String file) throws CarsCollectionBackendException;
     public void saveCars(String file) throws CarsCollectionBackendException;
-    public List<Car> search(double minPrice, double maxPrice, double minDistance, double maxDistance);
-    public List<Car> search(int minAge, int maxAge);
+    public List<Car> search(Range priceRange, Range distanceRange);
+    public List<Car> search(Range ageRange);
 }

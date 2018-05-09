@@ -1,4 +1,6 @@
 import Car.Car;
+import Range.Range;
+import Range.ParseException;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -51,17 +53,17 @@ public class SearchByOtherStrategy implements SearchStrategy {
 
     @Override
     public List<Car> doSearch() {
-        // convert distance and price combo box text into a range
-        double[] distanceRange = CarSalesSystem.convertToRange((String)distanceCombo.getSelectedItem());
-        double[] priceRange = CarSalesSystem.convertToRange((String)priceCombo.getSelectedItem());
-
-        if (priceRange[0] >= 0 && distanceRange[0] >= 0)
-        {
-            return carCollection.search((int)priceRange[0], (int)priceRange[1], (double)distanceRange[0], (double)distanceRange[1]);
-        } else {
-            // if the lower bounds happened to be negative, retain old behaviour of returning zero results
+        try {
+            // convert distance and price combo box text into a range
+            Range distanceRange = new Range((String) distanceCombo.getSelectedItem());
+            Range priceRange = new Range((String) priceCombo.getSelectedItem());
+            return carCollection.search(priceRange, distanceRange);
+        } catch (ParseException e) {
+            System.out.println("ParseException on search range:");
+            System.out.println(e.getMessage());
             return new ArrayList<Car>();
         }
+
     }
 
     @Override

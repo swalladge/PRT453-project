@@ -1,4 +1,5 @@
 import Car.Car;
+import Range.Range;
 
 import java.util.*;
 import java.awt.*;
@@ -277,70 +278,6 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
     public void componentShown(ComponentEvent ev) {}
 
     /**
-     * Converts a range string such as "50-100" or "20+" to a double array with minimum and maximum
-     * bounds
-     *
-     * @param s a string containing a valid range. "200", "100-200", "20+" are all examples
-     * of valid ranges
-     * @return array of 2 elements. First element indicating minimum bounds, second element
-     * indicating maximum bounds. A value of -1 for minimum and maximum bounds indicates an error
-     * in converting the parameter to a proper range. A value of -1 for the maximum bounds and
-     * a value > 0 for the minimum bounds indicates the maximum bounds is infinity in theory.
-     * If both bounds are greater than 0, this indicates a valid range a to b, where a and b
-     * can be equal.
-     */
-    public static double[] convertToRange(String s)
-    {
-        String[] parts = s.trim().split("-");
-        double[] bounds = new double[2];
-
-        try
-        {
-            // if true the range is either of the form 'm+' or 'm'
-            if (parts.length == 1)
-            {
-                String c = s.substring(s.length() - 1);
-
-                // if in the form "m+"
-                if (c.equals("+"))
-                {
-                    // get lower bounds from the string
-                    bounds[0] = Double.parseDouble(s.substring(0, s.length() - 1));
-                    // no upper maximum specified, infinite
-                    bounds[1] = -1;
-                }
-                // if true the number is of the form 'm'
-                else
-                {
-                    // upper bounds == lower bounds. The range is actually just a single number
-                    bounds[0] = Double.parseDouble(s);
-                    bounds[1] = bounds[0];
-                }
-            }
-            // if true, in the form "m-n"
-            else if(parts.length == 2)
-            {
-                bounds[0] = Double.parseDouble(parts[0]);
-                bounds[1] = Double.parseDouble(parts[1]);
-                if (bounds[0] > bounds[1])
-                {
-                    //incorrect bounds, example, 10-5
-                    bounds[0] = -1;
-                    bounds[1] = -1;
-                }
-            }
-        }
-        catch (NumberFormatException exp)
-        {
-            //incorrect bounds format
-            bounds[0] = -1;
-            bounds[1] = -1;
-        }
-
-        return bounds;
-    }
-
-    /**
      * gets the entire list of cars from CarsCollection
      *
      * @return array of cars containing individual details
@@ -403,23 +340,21 @@ public class CarSalesSystem extends JFrame implements ActionListener, ComponentL
      * @param maxAge maimum age of car
      * @return array of cars that match the search criteria
      */
-    public List<Car> search(int minAge, int maxAge)
+    public List<Car> search(Range ageRange)
     {
-        return carCollection.search(minAge, maxAge);
+        return carCollection.search(ageRange);
     }
 
     /**
      * Search by age using the CarsCollection
      *
-     * @param minPrice minimum price of car
-     * @param maxPrice maximum price of car
-     * @param minDistance minimum distance travelled by car
-     * @param maxDistance maximum distance travelled by car
+     * @param priceRange price range of car
+     * @param distanceRange distance travelled range of car
      * @return array of cars that match the search criteria
      */
-    public List<Car> search(int minPrice, int maxPrice, double minDistance, double maxDistance)
+    public List<Car> search(Range priceRange, Range distanceRange)
     {
-        return carCollection.search(minPrice, maxPrice,  minDistance, maxDistance);
+        return carCollection.search(priceRange, distanceRange);
     }
 
     /**

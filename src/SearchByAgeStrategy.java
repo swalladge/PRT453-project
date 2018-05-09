@@ -1,7 +1,10 @@
 import Car.Car;
+import Range.Range;
+import Range.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,8 +43,15 @@ public class SearchByAgeStrategy implements SearchStrategy {
 
     @Override
     public List<Car> doSearch() {
-        double[] range = CarSalesSystem.convertToRange((String)ageCombo.getSelectedItem());
-        return this.carCollection.search((int)range[0], (int)range[1]);
+        Range range = null;
+        try {
+            range = new Range((String)ageCombo.getSelectedItem());
+        } catch (ParseException e) {
+            System.out.println("ParseException on search range:");
+            System.out.println(e.getMessage());
+            return new ArrayList<Car>();
+        }
+        return this.carCollection.search(range);
     }
 
     @Override
