@@ -1,4 +1,5 @@
 import Car.Car;
+import Range.Range;
 
 import java.util.*;
 
@@ -145,25 +146,21 @@ public class CarsCollection implements CarsCollectionInterface
     /**
      * search by price and distance travelled
      *
-     * @param minPrice minimum price of car
-     * @param maxPrice maximum price of car
-     * @param minDistance minimum distance travelled by car
-     * @param maxDistance maximum distance travelled by car
+     * @param priceRange price range of car
+     * @param distanceRange distance travelled range of car
      * @return array of Car objects that matched the search criteria
      */
-    public List<Car> search(double minPrice, double maxPrice, double minDistance, double maxDistance)
+    public List<Car> search(Range priceRange, Range distanceRange)
     {
         List<Car> result = new ArrayList<Car>();
 
         for (Car car: this.cars)
         {
-            double price = car.getPrice();
-            double distance = car.getKilometers();
+            Double price = car.getPrice();
+            Double distance = car.getKilometers();
 
-            if (price >= minPrice && price <= maxPrice) {
-                if (distance >= minDistance && distance <= maxDistance) {
+            if (priceRange.contains(price.intValue()) && distanceRange.contains(distance.intValue())) {
                     result.add(car);
-                }
             }
         }
 
@@ -173,17 +170,15 @@ public class CarsCollection implements CarsCollectionInterface
     /**
      * search by age
      *
-     * @param minAge minimum age of car
-     * @param maxAge maximum age of car
-     * @return array of Car.Car objects that matched the search criteria
+     * @param age age range of car
+     * @return array of Car objects that matched the search criteria
      */
-    public List<Car> search(int minAge, int maxAge)
+    public List<Car> search(Range ageRange)
     {
         List<Car> result = new ArrayList<Car>();
         for (Car car: this.cars) {
             int age = car.getAge();
-
-            if (age >= minAge && (maxAge == -1 || age <= maxAge)) {
+            if (ageRange.contains(age)) {
                 result.add(car);
             }
         }

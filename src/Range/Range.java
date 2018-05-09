@@ -13,7 +13,7 @@ public class Range {
 
     private Node rootNode;
 
-    Range(String s) throws ParseException {
+    public Range(String s) throws ParseException {
         // split into tokens
         Matcher tokenizer = pat.matcher(s);
         List<String> tokens = new ArrayList<>();
