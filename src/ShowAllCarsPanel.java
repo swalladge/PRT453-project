@@ -150,3 +150,26 @@ public class ShowAllCarsPanel extends JPanel implements ActionListener, ChangeLi
             JOptionPane.showMessageDialog(carSystem, "You can't navigate any further", "Alert", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+public interface Notify{
+    public void addNotif(Notify n);
+    public void removeNotif(Notify n);
+    public void notifyNotif();
+}
+
+public class Car implements Notify{
+
+//State of car
+private boolean inStock = true
+
+//get inStock
+public boolean isInStock(){
+    return inStock;
+    }
+
+//set inStock
+public void setInStock(boolean inStock){
+    this.inStock = inStock;
+    }
+
+}
