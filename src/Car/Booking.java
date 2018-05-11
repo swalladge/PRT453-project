@@ -18,6 +18,19 @@ public class Booking {
   public State getState() {
     return state;
   }
+
+//Orignator for Momento Pattern
+##############################################################  
+  public String BookingContents;
+  public void setState(String contents) {
+    this.BookingContents = contents;
+  }
+  public Recall save() {
+    return new Recall(BookingContents);
+  }
+  public void restoreToState(Recall memento) {
+    BookingContents = memento.getSavedState();
+  }
 }
 
 ##############################################################
